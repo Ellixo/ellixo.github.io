@@ -191,7 +191,7 @@ body {
 .home-template #header, .archive-template #header {
     height: 60px;
     position: relative;
-    background: #FFF
+    background: #879637
 }
 .home-template #header .header-background, .archive-template #header .header-background {
     background: none
@@ -310,7 +310,7 @@ body {
     width: 100%;
     margin: inherit;
     margin-bottom: 20px;
-    background: #FFF;
+    background: #008576;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -425,8 +425,8 @@ body {
     right: 0
 }
 #footer {
-    background: #008576;
-    color: #999;
+    background: #879637;
+    color: #fff;
     font-size: 12px;
     font-size: 1.2rem;
     text-transform: uppercase;
@@ -449,7 +449,7 @@ body {
 }
 #footer .bottom {
     padding: 20px 20px;
-    background: #879637
+    background: #747678;
 }
 #footer .bottom .attribution {
     max-width: 600px;

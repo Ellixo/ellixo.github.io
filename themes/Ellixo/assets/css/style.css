@@ -442,7 +442,8 @@ body {
     margin: 10px 0
 }
 #footer .colophon section:first-child {
-    margin-top: 0
+    margin-top: 0;
+    text-align: center;
 }
 #footer .colophon section:last-child {
     margin-bottom: 0
@@ -454,6 +455,7 @@ body {
 #footer .bottom .attribution {
     max-width: 600px;
     margin: 0 auto
+    text-align: center;
 }
 #footer .bottom .attribution a {
     color: #FFF

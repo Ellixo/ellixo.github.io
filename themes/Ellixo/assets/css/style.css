@@ -191,7 +191,7 @@ body {
 .home-template #header, .archive-template #header {
     height: 60px;
     position: relative;
-    background: #879637
+    background: #FFF
 }
 .home-template #header .header-background, .archive-template #header .header-background {
     background: none
@@ -302,7 +302,7 @@ body {
 }
 #main.archive {
     overflow: hidden;
-    background: #f2f2f2
+    background: #008576
 }
 #main.archive .post {
     float: left;
@@ -310,7 +310,7 @@ body {
     width: 100%;
     margin: inherit;
     margin-bottom: 20px;
-    background: #008576;
+    background: #FFF;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;

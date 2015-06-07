@@ -302,7 +302,7 @@ body {
 }
 #main.archive {
     overflow: hidden;
-    background: #008576
+    background: #747678
 }
 #main.archive .post {
     float: left;
@@ -449,7 +449,7 @@ body {
 }
 #footer .bottom {
     padding: 20px 20px;
-    background: #747678;
+    background: #292C39;
 }
 #footer .bottom .attribution {
     max-width: 600px;

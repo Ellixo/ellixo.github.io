@@ -209,6 +209,7 @@ body {
     box-sizing: border-box;
     padding: 0 20px;
     color: #999
+    overflow: hidden;
 }
 .home-template #header .blog-content a, .archive-template #header .blog-content a {
     color: #999

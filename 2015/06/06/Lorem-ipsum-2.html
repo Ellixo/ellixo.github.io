@@ -23,7 +23,7 @@
     <meta property="og:description" content="1 - Réconciliez vous avec Spring Je travaille depuis plusieurs semaines avec Spring Boot. Je dois avouer que l&amp;#8217;idée de mettre en place ce nouvel outil ne m&amp;#8217;enchantait gère. Bien sûr j&amp;#8217;avais eu de..." />
     <meta property="og:url" content="https://ellixo.github.io/2015/06/06/Lorem-ipsum-2.html" />
     <meta property="article:published_time" content="2015-06-05T22:00:00.000Z" />
-    <meta property="article:modified_time" content="2015-06-08T19:35:55.403Z" />
+    <meta property="article:modified_time" content="2015-06-08T19:36:27.095Z" />
     
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Lorem ipsum 2" />
@@ -45,7 +45,7 @@
     "headline": "Lorem ipsum 2",
     "url": "https://ellixo.github.io/2015/06/06/Lorem-ipsum-2.html",
     "datePublished": "2015-06-05T22:00:00.000Z",
-    "dateModified": "2015-06-08T19:35:55.403Z",
+    "dateModified": "2015-06-08T19:36:27.095Z",
     "description": "1 - Réconciliez vous avec Spring Je travaille depuis plusieurs semaines avec Spring Boot. Je dois avouer que l&amp;#8217;idée de mettre en place ce nouvel outil ne m&amp;#8217;enchantait gère. Bien sûr j&amp;#8217;avais eu de..."
 }
     </script>
@@ -89,34 +89,26 @@
 <p>Prenons l&#8217;application REST suivante :</p>
 </div>
 <div class="listingblock">
+<div class="title">Classe principale</div>
 <div class="content">
-<pre class="highlight"><code class="language-java" data-lang="java">Classe principale
-----
-@Configuration
+<pre class="highlight"><code class="language-java" data-lang="java">@Configuration
 @EnableAutoConfiguration
 @ComponentScan
-public class Application {</code></pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-}</pre>
+public class Application {
+
+	public static void main(String[] args) {
+        	SpringApplication.run(Application.class, args);
+	}
+
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>}</p>
+<p>Services REST</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>Services REST
-
-[source,java]</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>@RestController
+<pre class="highlight"><code class="language-java" data-lang="java">@RestController
 @RequestMapping("/api")
 public class RestServices {
 	@RequestMapping(method = RequestMethod.GET)
@@ -125,39 +117,36 @@ public class RestServices {
     String ping() {
     	return "{\"status\":\"OK\",\"timestamp\":\"" + System.currentTimeMillis() + "\"}";
     }
-}</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>Voilà, c'est tout !
-
-En effet, plus de configuration XML, plus de déclaration de beans à rallonge, plus de web.xml. Tout n'est pas nouveau bien sûr (configuration Java notamment) mais Spring Boot à pousser la logique de simplification entamée par Spring depuis plusieurs années à son maximum.
-
-En effet, nous avons ici une application web complète qu'il est possible de lancer dans la foulée (oui sans serveur d'application...en apparence, nous y reviendrons) :
-[source,bash]</pre>
+}</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>&#8230;&#8203;
-2015-05-27 14:28:49.114&nbsp; INFO 50883 --- [ost-startStop-1] o.s.web.context.ContextLoader : Root WebApplicationContext: initialization completed in 2102 ms</p>
+<p>Voilà, c&#8217;est tout !</p>
+</div>
+<div class="paragraph">
+<p>En effet, plus de configuration XML, plus de déclaration de beans à rallonge, plus de web.xml. Tout n&#8217;est pas nouveau bien sûr (configuration Java notamment) mais Spring Boot à pousser la logique de simplification entamée par Spring depuis plusieurs années à son maximum.</p>
+</div>
+<div class="paragraph">
+<p>En effet, nous avons ici une application web complète qu&#8217;il est possible de lancer dans la foulée (oui sans serveur d&#8217;application&#8230;&#8203;en apparence, nous y reviendrons) :</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>avec le test correspondant :
-
-[source,bash]</pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">...
+2015-05-27 14:28:49.114&amp;nbsp; INFO 50883 --- [ost-startStop-1] o.s.web.context.ContextLoader : Root WebApplicationContext: initialization completed in 2102 ms</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>~$ curl <a href="http://localhost:8080/api" class="bare">http://localhost:8080/api</a>
-{"status":"OK","timestamp":"1432733392861"}</p>
+<p>avec le test correspondant :</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>2 - KISS ("Keep It Simple, Stupid")
-===================================
-blabla</pre>
+<pre class="highlight"><code class="language-bash" data-lang="bash">~$ curl http://localhost:8080/api
+{"status":"OK","timestamp":"1432733392861"}</code></pre>
 </div>
+</div>
+<h1 id="_2_kiss_keep_it_simple_stupid" class="sect0">2 - KISS ("Keep It Simple, Stupid")</h1>
+<div class="paragraph">
+<p>blabla</p>
 </div>
         </section>
 

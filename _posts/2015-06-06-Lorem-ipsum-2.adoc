@@ -29,6 +29,7 @@ public class Application {
 @RestController
 @RequestMapping("/api")
 public class RestServices {
+
 	@RequestMapping(method = RequestMethod.GET)
     public
     @ResponseBody

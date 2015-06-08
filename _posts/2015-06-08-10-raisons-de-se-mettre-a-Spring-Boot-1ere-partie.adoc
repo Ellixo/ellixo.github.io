@@ -9,7 +9,7 @@ Prenons l'application REST suivante :
 
 Classe principale
 
-[java]
+[source,java]
 ----
 @Configuration
 @EnableAutoConfiguration
@@ -25,7 +25,7 @@ public class Application {
 
 Services REST
 
-[java]
+[source,java]
 ----
 @RestController
 @RequestMapping("/api")
@@ -44,7 +44,7 @@ Voilà, c'est tout !
 En effet, plus de configuration XML, plus de déclaration de beans à rallonge, plus de web.xml. Tout n'est pas nouveau bien sûr (configuration Java notamment) mais Spring Boot à pousser la logique de simplification entamée par Spring depuis plusieurs années à son maximum.
 
 En effet, nous avons ici une application web complète qu'il est possible de lancer dans la foulée (oui sans serveur d'application...en apparence, nous y reviendrons) :
-[bash]
+[source,bash]
 ----
 ...
 2015-05-27 14:28:49.114&nbsp; INFO 50883 --- [ost-startStop-1] o.s.web.context.ContextLoader : Root WebApplicationContext: initialization completed in 2102 ms
@@ -52,7 +52,7 @@ En effet, nous avons ici une application web complète qu'il est possible de lan
 
 avec le test correspondant :
 
-[bash]
+[source,bash]
 ----
 ~$ curl http://localhost:8080/api
 {"status":"OK","timestamp":"1432733392861"}

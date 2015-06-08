@@ -138,7 +138,7 @@ body {
     border: 0
 }
 #header .header-content .post-data a:hover, #header .header-content .tag-data a:hover {
-    color: #FFF
+    color: #292C39
 }
 #header .header-content .post-data>span, #header .header-content .tag-data>span {
     display: block

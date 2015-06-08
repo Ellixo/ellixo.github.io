@@ -169,7 +169,7 @@ body {
     font-size: 14px;
     font-size: 1.4rem;
     cursor: default;
-    color: #ccc;
+    color: #008576;
     line-height: 60px;
     float: left;
     margin-left: 10px
@@ -586,12 +586,12 @@ a {
     -o-transition: all 0.2s;
     -webkit-transition: all 0.2s;
     transition: all 0.2s;
-    color: #000;
+    color: #008576;
     text-decoration: none
 }
 a:hover {
-    color: #000;
-    border-color: #000
+    color: #008576;
+    border-color: #008576
 }
 p, blockquote, figure, canvas, iframe, form {
     margin-bottom: 20px

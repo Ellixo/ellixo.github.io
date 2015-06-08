@@ -23,9 +23,8 @@ public class Application {
 }
 ----
 
-Services REST
-
 [source,java]
+.Services REST
 ----
 @RestController
 @RequestMapping("/api")
@@ -39,11 +38,12 @@ public class RestServices {
 }
 ----
 
-Voilà, c'est tout !
+*Voilà, c'est tout !*
 
 En effet, plus de configuration XML, plus de déclaration de beans à rallonge, plus de web.xml. Tout n'est pas nouveau bien sûr (configuration Java notamment) mais Spring Boot à pousser la logique de simplification entamée par Spring depuis plusieurs années à son maximum.
 
 En effet, nous avons ici une application web complète qu'il est possible de lancer dans la foulée (oui sans serveur d'application...en apparence, nous y reviendrons) :
+
 [source,bash]
 ----
 ...

@@ -307,7 +307,7 @@ body {
 }
 #main.archive {
     overflow: hidden;
-    background: #747678
+    background: ##DEDDDF;
 }
 #main.archive .post {
     float: left;

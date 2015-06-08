@@ -30,7 +30,7 @@ public class Application {
 @RequestMapping("/api")
 public class RestServices {
 
-	@RequestMapping(method = RequestMethod.GET)
+@RequestMapping(method = RequestMethod.GET)
     public
     @ResponseBody
     String ping() {

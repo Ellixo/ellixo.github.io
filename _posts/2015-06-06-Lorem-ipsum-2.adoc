@@ -9,7 +9,7 @@ Je dois admettre que Spring Boot est aujourd'hui une évidence pour moi ; c'est 
 Prenons l'application REST suivante :
 
 [source,java]
-Classe principale
+.Classe principale
 ----
 @Configuration
 @EnableAutoConfiguration

@@ -49,9 +49,7 @@ En effet, nous avons ici une application web complète qu'il est possible de lan
 ...
 2015-05-27 14:28:49.114&nbsp; INFO 50883 --- [ost-startStop-1] o.s.web.context.ContextLoader : Root WebApplicationContext: initialization completed in 2102 ms
 ----
-
 avec le test correspondant :
-
 [source,bash]
 ----
 ~$ curl http://localhost:8080/api

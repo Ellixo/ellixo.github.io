@@ -31,9 +31,8 @@ public class Application {
 public class RestServices {
 
 	@RequestMapping(method = RequestMethod.GET)
-    public
     @ResponseBody
-    String ping() {
+    public String ping() {
     	return "{\"status\":\"OK\",\"timestamp\":\"" + System.currentTimeMillis() + "\"}";
     }
 }

@@ -9,41 +9,54 @@ Prenons l'application REST suivante :
 
 Classe principale
 
-	@Configuration
-	@EnableAutoConfiguration
-	@ComponentScan
-	public class Application {
-    	public static void main(String[] args) {
+[java]
+----
+@Configuration
+@EnableAutoConfiguration
+@ComponentScan
+public class Application {
+       
+	public static void main(String[] args) {
         	SpringApplication.run(Application.class, args);
-    	}
 	}
-    
+     
+}
+----
+
 Services REST
 
-	@RestController
-	@RequestMapping("/api")
-	public class RestServices {
-    	@RequestMapping(method = RequestMethod.GET)
-    	public
-    	@ResponseBody
-    	String ping() {
-        	return "{\"status\":\"OK\",\"timestamp\":\"" + System.currentTimeMillis() + "\"}";
-    	}
-	}
-    
+[java]
+----
+@RestController
+@RequestMapping("/api")
+public class RestServices {
+	@RequestMapping(method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String ping() {
+    	return "{\"status\":\"OK\",\"timestamp\":\"" + System.currentTimeMillis() + "\"}";
+    }
+}
+----
+
 Voilà, c'est tout !
 
 En effet, plus de configuration XML, plus de déclaration de beans à rallonge, plus de web.xml. Tout n'est pas nouveau bien sûr (configuration Java notamment) mais Spring Boot à pousser la logique de simplification entamée par Spring depuis plusieurs années à son maximum.
 
 En effet, nous avons ici une application web complète qu'il est possible de lancer dans la foulée (oui sans serveur d'application...en apparence, nous y reviendrons) :
+[bash]
+----
+...
+2015-05-27 14:28:49.114&nbsp; INFO 50883 --- [ost-startStop-1] o.s.web.context.ContextLoader : Root WebApplicationContext: initialization completed in 2102 ms
+----
 
-	...
-	2015-05-27 14:28:49.114&nbsp; INFO 50883 --- [ost-startStop-1] o.s.web.context.ContextLoader : Root WebApplicationContext: initialization completed in 2102 ms
-    
 avec le test correspondant :
 
-	~$ curl http://localhost:8080/api
-	{"status":"OK","timestamp":"1432733392861"}
+[bash]
+----
+~$ curl http://localhost:8080/api
+{"status":"OK","timestamp":"1432733392861"}
+----
     
 2 - KISS ("Keep It Simple, Stupid")
 ===================================

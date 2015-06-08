@@ -13,6 +13,7 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <link href="{{asset 'css/style.css'}}" rel="stylesheet" type="text/css">
     <link href="{{asset 'css/animate.min.css'}}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/default.min.css">
     <link href="{{asset 'favicon.ico'}}" rel="shortcut icon">
     {{ghost_head}}
 </head>
@@ -35,6 +36,8 @@
     ga('send', 'pageview');
 
     </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
     {{/if}}
 </body>
 </html>

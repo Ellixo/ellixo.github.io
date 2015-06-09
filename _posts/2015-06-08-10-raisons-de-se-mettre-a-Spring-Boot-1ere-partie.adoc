@@ -46,7 +46,7 @@ En effet, plus de configuration XML, plus de déclaration de beans à rallonge, 
 
 En effet, nous avons ici une application web complète qu'il est possible de lancer dans la foulée (oui sans serveur d'application...en apparence, nous y reviendrons) :
 
-[source]
+[source,bash]
 ----
 ...
 2015-05-27 14:28:49.114  INFO 50883 --- [ost-startStop-1] o.s.web.context.ContextLoader : Root WebApplicationContext: initialization completed in 2102 ms
@@ -54,7 +54,7 @@ En effet, nous avons ici une application web complète qu'il est possible de lan
 
 avec le test correspondant :
 
-[source]
+[source,bash]
 ----
 ~$ curl http://localhost:8080/api
 {"status":"OK","timestamp":"1432733392861"}

@@ -1,5 +1,6 @@
 = 10 raisons de se mettre à Spring Boot (1ère partie)
 :hp-tags: Spring Boot
+
 1 - Vous réconcilier avec Spring
 ================================
 
@@ -103,7 +104,7 @@ Oui vous savez cette saleté de script que vous maintenez depuis plusieurs anné
 
 Spring Boot reprend bien entendu le principe de profils apparu il y a plusieurs années dans Spring mais le rend plus simple à mettre en oeuvre (on se répète).
 
-Il est ainsi possible d'amender n'importe quel composant (@Component) ou configuration (@Configuration) afin de les associer à un ou plusieurs profils et ainsi de les "activer" ou non selon le profil actif. Cela peut-être notamment utile pour activer des services "mockés" pour les profils de test.
+Il est ainsi possible d'amender n'importe quel composant (@Component) ou configuration (@Configuration) afin de les associer à un ou plusieurs profils et ainsi de les "activer" ou non selon le profil actif. Celapeut-être notamment utile pour activer des services "mockés" pour les profils de test.
 
 Il est également possible de "superposer" au fichier de configuration par défaut un fichier de configuration par profil afin d'ajouter ou de surcharger des propriétés.
 
@@ -113,7 +114,7 @@ Par exemple, prenons la configuration par défaut suivante (application.yml) :
 ----
 server:
     port: 9090
------
+----
 
 et le configuration de test suivante (application-test.yml) :
 
@@ -126,7 +127,7 @@ logging:
         org.springframework: DEBUG
 ----
 
-Si nus lançons l'application sans paramètre supplémentaire, la première configuration sera appliquée : port HTTP = 9090 et level log = INFO (valeur par défaut de Spring Boot) ; par contre, si nous lançons l'application avec le paramètre suivant _--spring.profiles.active=test_, alors la configuration suivante sera appliqué : port HTTP = 9292 et level log = DEBUG.
+Si nous lançons l'application sans paramètre supplémentaire, la première configuration sera appliquée : port HTTP = 9090 et level log = INFO (valeur par défaut de Spring Boot) ; par contre, si nous lançons l'application avec le paramètre suivant _--spring.profiles.active=test_, alors la configuration suivante sera appliqué : port HTTP = 9292 et level log = DEBUG.
 
 5 - Plus de serveur d'application...ou presque
 ==============================================

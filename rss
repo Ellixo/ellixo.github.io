@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>Blog Ellixo</title>
+    <link>http://blog.ellixo.com</link>
+    <description>Le Blog d'Ellixo</description>
+    <language>en-UK</language>
+    <pubDate>Wed, 10 Jun 2015 08:46:04 GMT</pubDate>
+    <dc:creator>info@ellixo.com</dc:creator>
+    <dc:date>2015-06-10T08:46:04Z</dc:date>
+    <dc:language>en-UK</dc:language>
+    <item>
+      <title>10 raisons de se mettre à Spring Boot (1ère partie)</title>
+      <link>http://blog.ellixo.com/2015/06/08/10-raisons-de-se-mettre-a-Spring-Boot-1ere-partie.html</link>
+      <description>1 - Vous réconcilier avec Spring Je travaille depuis plusieurs semaines avec Spring Boot. Je dois avouer que l&amp;#8217;idée de mettre en place ce nouvel outil ne m&amp;#8217;enchantait gère. Bien sûr j&amp;#8217;avais eu de...</description>
+      <category>Spring Boot</category>
+      <pubDate>Wed, 10 Jun 2015 10:43:50 GMT</pubDate>
+      <guid>http://blog.ellixo.com/2015/06/08/10-raisons-de-se-mettre-a-Spring-Boot-1ere-partie.html</guid>
+      <dc:date>2015-06-10T10:43:50Z</dc:date>
+    </item>
+  </channel>
+</rss>

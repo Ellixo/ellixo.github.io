@@ -1,4 +1,5 @@
 = 10 raisons de se mettre à Spring Boot (1ère partie)
+:hp-tags: Spring Boot
 1 - Vous réconcilier avec Spring
 ================================
 

@@ -20,15 +20,15 @@
     <meta property="og:site_name" content="Blog Ellixo" />
     <meta property="og:type" content="article" />
     <meta property="og:title" content="10 raisons de se mettre à Spring Boot (1ère partie)" />
-    <meta property="og:description" content="Je travaille depuis plusieurs semaines avec Spring Boot. Je dois avouer que l&amp;#8217;idée de mettre en place ce nouvel outil ne m&amp;#8217;enchantait gère. Bien sûr j&amp;#8217;avais eu de bons retours mais après plusieurs années,..." />
+    <meta property="og:description" content="1 - Vous réconcilier avec Spring Je travaille depuis plusieurs semaines avec Spring Boot. Je dois avouer que l&amp;#8217;idée de mettre en place ce nouvel outil ne m&amp;#8217;enchantait gère. Bien sûr j&amp;#8217;avais eu de..." />
     <meta property="og:url" content="http://blog.ellixo.com/2015/06/08/10-raisons-de-se-mettre-a-Spring-Boot-1ere-partie.html" />
     <meta property="article:published_time" content="2015-06-07T22:00:00.000Z" />
-    <meta property="article:modified_time" content="2015-06-10T08:41:25.235Z" />
+    <meta property="article:modified_time" content="2015-06-10T08:43:24.224Z" />
     <meta property="article:tag" content="Spring Boot" />
     
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="10 raisons de se mettre à Spring Boot (1ère partie)" />
-    <meta name="twitter:description" content="Je travaille depuis plusieurs semaines avec Spring Boot. Je dois avouer que l&amp;#8217;idée de mettre en place ce nouvel outil ne m&amp;#8217;enchantait gère. Bien sûr j&amp;#8217;avais eu de bons retours mais après plusieurs années,..." />
+    <meta name="twitter:description" content="1 - Vous réconcilier avec Spring Je travaille depuis plusieurs semaines avec Spring Boot. Je dois avouer que l&amp;#8217;idée de mettre en place ce nouvel outil ne m&amp;#8217;enchantait gère. Bien sûr j&amp;#8217;avais eu de..." />
     <meta name="twitter:url" content="http://blog.ellixo.com/2015/06/08/10-raisons-de-se-mettre-a-Spring-Boot-1ere-partie.html" />
     
     <script type="application/ld+json">
@@ -46,9 +46,9 @@
     "headline": "10 raisons de se mettre à Spring Boot (1ère partie)",
     "url": "http://blog.ellixo.com/2015/06/08/10-raisons-de-se-mettre-a-Spring-Boot-1ere-partie.html",
     "datePublished": "2015-06-07T22:00:00.000Z",
-    "dateModified": "2015-06-10T08:41:25.235Z",
+    "dateModified": "2015-06-10T08:43:24.224Z",
     "keywords": "Spring Boot",
-    "description": "Je travaille depuis plusieurs semaines avec Spring Boot. Je dois avouer que l&amp;#8217;idée de mettre en place ce nouvel outil ne m&amp;#8217;enchantait gère. Bien sûr j&amp;#8217;avais eu de bons retours mais après plusieurs années,..."
+    "description": "1 - Vous réconcilier avec Spring Je travaille depuis plusieurs semaines avec Spring Boot. Je dois avouer que l&amp;#8217;idée de mettre en place ce nouvel outil ne m&amp;#8217;enchantait gère. Bien sûr j&amp;#8217;avais eu de..."
 }
     </script>
 
@@ -80,8 +80,7 @@
 <main id="main" class="content">
     <article itemtype="http://schema.org/BlogPosting" class="animated fadeIn content post post tag-Spring-Boot">
         <section class="post-content">
-            <div id="preamble">
-<div class="sectionbody">
+            <h1 id="_1_vous_r_concilier_avec_spring" class="sect0">1 - Vous réconcilier avec Spring</h1>
 <div class="paragraph">
 <p>Je travaille depuis plusieurs semaines avec Spring Boot. Je dois avouer que l&#8217;idée de mettre en place ce nouvel outil ne m&#8217;enchantait gère. Bien sûr j&#8217;avais eu de bons retours mais après plusieurs années, je m'étais lassé de l'écosystème Spring : trop lourd, trop de librairies, trop JEE &#8230;&#8203; Je continuais à utiliser Spring dans mes projets plus par habitude que par conviction.</p>
 </div>
@@ -147,8 +146,6 @@ public class RestServices {
 {"status":"OK","timestamp":"1432733392861"}</code></pre>
 </div>
 </div>
-</div>
-</div>
 <h1 id="_2_kiss_keep_it_simple_stupid" class="sect0">2 - KISS ("Keep It Simple, Stupid")</h1>
 <div class="paragraph">
 <p>S&#8217;il fallait résumer Spring Boot par un seul mot, ce serait "Simplicité". Spring Boot a été conçu pour rendre la vie du développeur plus simple et lui permettre de se concentrer sur le coeur de l&#8217;application et non pas sur les aspects annexes : configuration, tests, sécurité, déploiement&#8230;&#8203;</p>
@@ -196,7 +193,7 @@ public class RestServices {
 <p>Spring Boot reprend bien entendu le principe de profils apparu il y a plusieurs années dans Spring mais le rend plus simple à mettre en oeuvre (on se répète).</p>
 </div>
 <div class="paragraph">
-<p>Il est ainsi possible d&#8217;amender n&#8217;importe quel composant (@Component) ou configuration (@Configuration) afin de les associer à un ou plusieurs profils et ainsi de les "activer" ou non selon le profil actif. Cela peut-être notamment utile pour activer des services "mockés" pour les profils de test.</p>
+<p>Il est ainsi possible d&#8217;amender n&#8217;importe quel composant (@Component) ou configuration (@Configuration) afin de les associer à un ou plusieurs profils et ainsi de les "activer" ou non selon le profil actif. Celapeut-être notamment utile pour activer des services "mockés" pour les profils de test.</p>
 </div>
 <div class="paragraph">
 <p>Il est également possible de "superposer" au fichier de configuration par défaut un fichier de configuration par profil afin d&#8217;ajouter ou de surcharger des propriétés.</p>
@@ -207,38 +204,46 @@ public class RestServices {
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code>server:
-    port: 9090
------
-
-et le configuration de test suivante (application-test.yml) :
-
-[source]</code></pre>
+    port: 9090</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>server:
-    port: 9292
-logging:
-    level:
-        org.springframework: DEBUG</p>
+<p>et le configuration de test suivante (application-test.yml) :</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre>Si nus lançons l'application sans paramètre supplémentaire, la première configuration sera appliquée : port HTTP = 9090 et level log = INFO (valeur par défaut de Spring Boot) ; par contre, si nous lançons l'application avec le paramètre suivant _--spring.profiles.active=test_, alors la configuration suivante sera appliqué : port HTTP = 9292 et level log = DEBUG.
-
-5 - Plus de serveur d'application...ou presque
-==============================================
-
-Finie la galère du déploiement avec Spring Boot. En effet, bien qu'il soit possible de packager de manière classsique votre application dans un fichier war pour le déployer au sein de votre serveur d'application [blue line-through]*imposé* chéri, le packaging par défaut un jar "self-contained" (jar exécutable contenant l'ensemble des dépendances de l'application).
-
-Ce jar contient notamment l'ensemble des librairies Tomcat (ou Jetty - ce sont les seuls containeurs gérés par défaut) permettant de lancer le serveur d'application nécessaire à l'exécution de l'application.
-
-Bien sûr, il n'est pas évident de se faire à cette idée après plusieurs années de déploiement lourd sous containeur mais cela à de nombreux avantages :
-
-* Simplicité de déploiement (le seul prérequis est Java).
-* Cloud-ready.
-* Contournement des référentiels système - il est courant que l'on vous impose un serveur d'application (pas le plus léger normalement), il est plus rare que l'on vous empêche de lancer un simple processus Java.</pre>
+<pre class="highlight"><code>server:
+    port: 9292
+logging:
+    level:
+        org.springframework: DEBUG</code></pre>
 </div>
+</div>
+<div class="paragraph">
+<p>Si nous lançons l&#8217;application sans paramètre supplémentaire, la première configuration sera appliquée : port HTTP = 9090 et level log = INFO (valeur par défaut de Spring Boot) ; par contre, si nous lançons l&#8217;application avec le paramètre suivant <em>--spring.profiles.active=test</em>, alors la configuration suivante sera appliqué : port HTTP = 9292 et level log = DEBUG.</p>
+</div>
+<h1 id="_5_plus_de_serveur_d_application_ou_presque" class="sect0">5 - Plus de serveur d&#8217;application&#8230;&#8203;ou presque</h1>
+<div class="paragraph">
+<p>Finie la galère du déploiement avec Spring Boot. En effet, bien qu&#8217;il soit possible de packager de manière classsique votre application dans un fichier war pour le déployer au sein de votre serveur d&#8217;application <strong class="blue line-through">imposé</strong> chéri, le packaging par défaut un jar "self-contained" (jar exécutable contenant l&#8217;ensemble des dépendances de l&#8217;application).</p>
+</div>
+<div class="paragraph">
+<p>Ce jar contient notamment l&#8217;ensemble des librairies Tomcat (ou Jetty - ce sont les seuls containeurs gérés par défaut) permettant de lancer le serveur d&#8217;application nécessaire à l&#8217;exécution de l&#8217;application.</p>
+</div>
+<div class="paragraph">
+<p>Bien sûr, il n&#8217;est pas évident de se faire à cette idée après plusieurs années de déploiement lourd sous containeur mais cela à de nombreux avantages :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Simplicité de déploiement (le seul prérequis est Java).</p>
+</li>
+<li>
+<p>Cloud-ready.</p>
+</li>
+<li>
+<p>Contournement des référentiels système - il est courant que l&#8217;on vous impose un serveur d&#8217;application (pas le plus léger normalement), il est plus rare que l&#8217;on vous empêche de lancer un simple processus Java.</p>
+</li>
+</ul>
 </div>
         </section>
 

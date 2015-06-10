@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>10 raisons de se mettre à Spring Boot (1ère partie)</title>
+    <meta name="description" content="" />
+    <link href="//fonts.googleapis.com/css?family=Noto+Sans:300,400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic" rel="stylesheet" type="text/css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="//blog.ellixo.com/themes/Ellixo/assets/css/style.css?v=1.0.0" rel="stylesheet" type="text/css">
+    <link href="//blog.ellixo.com/themes/Ellixo/assets/css/animate.min.css?v=1.0.0" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/default.min.css">
+    <link href="//blog.ellixo.com/themes/Ellixo/favicon.ico" rel="shortcut icon">
+    <link rel="canonical" href="http://blog.ellixo.com/2015/06/08/10-raisons-de-se-mettre-a-Spring-Boot-1ere-partie.html" />
+    
+    <meta property="og:site_name" content="Blog Ellixo" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="10 raisons de se mettre à Spring Boot (1ère partie)" />
+    <meta property="og:description" content="Je travaille depuis plusieurs semaines avec Spring Boot. Je dois avouer que l&amp;#8217;idée de mettre en place ce nouvel outil ne m&amp;#8217;enchantait gère. Bien sûr j&amp;#8217;avais eu de bons retours mais après plusieurs années,..." />
+    <meta property="og:url" content="http://blog.ellixo.com/2015/06/08/10-raisons-de-se-mettre-a-Spring-Boot-1ere-partie.html" />
+    <meta property="article:published_time" content="2015-06-07T22:00:00.000Z" />
+    <meta property="article:modified_time" content="2015-06-10T08:41:25.235Z" />
+    <meta property="article:tag" content="Spring Boot" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="10 raisons de se mettre à Spring Boot (1ère partie)" />
+    <meta name="twitter:description" content="Je travaille depuis plusieurs semaines avec Spring Boot. Je dois avouer que l&amp;#8217;idée de mettre en place ce nouvel outil ne m&amp;#8217;enchantait gère. Bien sûr j&amp;#8217;avais eu de bons retours mais après plusieurs années,..." />
+    <meta name="twitter:url" content="http://blog.ellixo.com/2015/06/08/10-raisons-de-se-mettre-a-Spring-Boot-1ere-partie.html" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "Blog Ellixo",
+    "author": {
+        "@type": "Person",
+        "name": "Grégory Le Bonniec",
+        "image": "https://avatars.githubusercontent.com/u/9615799?v=3",
+        "url": "undefined/author/undefined",
+        "sameAs": ""
+    },
+    "headline": "10 raisons de se mettre à Spring Boot (1ère partie)",
+    "url": "http://blog.ellixo.com/2015/06/08/10-raisons-de-se-mettre-a-Spring-Boot-1ere-partie.html",
+    "datePublished": "2015-06-07T22:00:00.000Z",
+    "dateModified": "2015-06-10T08:41:25.235Z",
+    "keywords": "Spring Boot",
+    "description": "Je travaille depuis plusieurs semaines avec Spring Boot. Je dois avouer que l&amp;#8217;idée de mettre en place ce nouvel outil ne m&amp;#8217;enchantait gère. Bien sûr j&amp;#8217;avais eu de bons retours mais après plusieurs années,..."
+}
+    </script>
+
+    <meta name="generator" content="Ghost ?" />
+    <link rel="alternate" type="application/rss+xml" title="Blog Ellixo" href="http://blog.ellixo.com/rss" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+</head>
+<body class="post-template tag-Spring-Boot">
+    <header id="header" class="animated fadeIn">
+    <div class="header-background">
+    <section class="blog-content">
+        <a href="http://blog.ellixo.com"><img src="/images/logo_w.png" class="logo"/></a>
+        <span class="blog-description">Le Blog d&#x27;Ellixo</span>
+        <nav class="links fadeIn animated">
+            <ul>
+                <!-- <li class="rss"><a title="RSS Feed" href="/rss/"><i class="fa fa-fw fa-rss-square"></i></a></li> -->
+        
+            </ul>
+        </nav>
+    </section>
+    <section class="header-content">
+        <h1 class="post-title animated fadeInUp">10 raisons de se mettre à Spring Boot (1ère partie)</h1>
+        <span class="post-data"><span class="date animated fadeInUp"><i class="fa fa-clock-o"></i> <time class="timesince date" data-timesince="1433714400" datetime="2015-06-08T00:00" title="08 June 2015">2015-06-08 00:00:00<ago class="ago"></time></span>
+            <span class="tags animated fadeInUp"><i class="fa fa-tags"></i> <a href="http://blog.ellixo.com/tag/Spring-Boot">Spring Boot</a></span>
+            <span class="author animated fadeInUp"><i class="fa fa-user"></i> <a href="">Grégory Le Bonniec</a></span></span>
+    </section>
+    </div>
+</header>
+<main id="main" class="content">
+    <article itemtype="http://schema.org/BlogPosting" class="animated fadeIn content post post tag-Spring-Boot">
+        <section class="post-content">
+            <div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Je travaille depuis plusieurs semaines avec Spring Boot. Je dois avouer que l&#8217;idée de mettre en place ce nouvel outil ne m&#8217;enchantait gère. Bien sûr j&#8217;avais eu de bons retours mais après plusieurs années, je m'étais lassé de l'écosystème Spring : trop lourd, trop de librairies, trop JEE &#8230;&#8203; Je continuais à utiliser Spring dans mes projets plus par habitude que par conviction.</p>
+</div>
+<div class="paragraph">
+<p>Je dois admettre que Spring Boot est aujourd&#8217;hui une évidence pour moi ; c&#8217;est le projet qui a rendu à Spring sa simplicité d&#8217;origine (et sans XML s&#8217;il vous plait).</p>
+</div>
+<div class="paragraph">
+<p>Prenons l&#8217;application REST suivante :</p>
+</div>
+<div class="listingblock">
+<div class="title">Classe principale</div>
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Configuration
+@EnableAutoConfiguration
+@ComponentScan
+public class Application {
+
+	public static void main(String[] args) {
+		SpringApplication.run(Application.class, args);
+	}
+
+}</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Services REST</div>
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@RestController
+@RequestMapping("/api")
+public class RestServices {
+
+	@RequestMapping(method = RequestMethod.GET)
+	public
+	@ResponseBody
+	String ping() {
+    	return "{\"status\":\"OK\",\"timestamp\":\"" + System.currentTimeMillis() + "\"}";
+	}
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Voilà, c&#8217;est tout !</strong></p>
+</div>
+<div class="paragraph">
+<p>En effet, plus de configuration XML, plus de déclaration de beans à rallonge, plus de web.xml. Tout n&#8217;est pas nouveau bien sûr (configuration Java notamment) mais Spring Boot à pousser la logique de simplification entamée par Spring depuis plusieurs années à son maximum.</p>
+</div>
+<div class="paragraph">
+<p>En effet, nous avons ici une application web complète qu&#8217;il est possible de lancer dans la foulée (oui sans serveur d&#8217;application&#8230;&#8203;en apparence, nous y reviendrons) :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">...
+2015-05-27 14:28:49.114  INFO 50883 --- [ost-startStop-1] o.s.web.context.ContextLoader : Root WebApplicationContext: initialization completed in 2102 ms</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>avec le test correspondant :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">~$ curl http://localhost:8080/api
+{"status":"OK","timestamp":"1432733392861"}</code></pre>
+</div>
+</div>
+</div>
+</div>
+<h1 id="_2_kiss_keep_it_simple_stupid" class="sect0">2 - KISS ("Keep It Simple, Stupid")</h1>
+<div class="paragraph">
+<p>S&#8217;il fallait résumer Spring Boot par un seul mot, ce serait "Simplicité". Spring Boot a été conçu pour rendre la vie du développeur plus simple et lui permettre de se concentrer sur le coeur de l&#8217;application et non pas sur les aspects annexes : configuration, tests, sécurité, déploiement&#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>L&#8217;ensemble de ces problématiques techniques sont bien sûr prise en charge par Spring Boot mais sont réduites à leur strict minimum. Quand on débute avec Spring Boot, on le ressent tout de suite et cela continue également jusqu'à la mise en production qui est également simplifiée comme nous le verrons plus loin (déploiement, profils &#8230;&#8203;).</p>
+</div>
+<div class="paragraph">
+<p>Prenons la configuration ; la configuration complète par défaut de l&#8217;application se résume à l&#8217;annotation <em>@EnableAutoConfiguration</em>. Cette annotation va alors s&#8217;appuyer sur l&#8217;ensemble des dépendances de l&#8217;application (MVC, Tomcat, &#8230;&#8203;) pour configurer l&#8217;application.</p>
+</div>
+<div class="paragraph">
+<p>Dans un second temps, il est possible d&#8217;amender cette configuration par défaut. Prenons par exemple le port HTTP ; par défaut, celui-ci est associé à la valeur 8080. Pour affecter un port différent, il suffit d&#8217;ajouter un fichier <em>application.yml</em> (ou <em>.properties</em>) à l&#8217;application avec le contenu suivant :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>server:
+  port: 9090</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Cette nouvelle configuration est prise en compte lors du prochain démarrage :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>2015-05-27 16:39:32.236  INFO 51056 --- [main] s.b.c.e.t.TomcatEmbeddedServletContainer : Tomcat initialized with port(s): &lt;strong&gt;9090&lt;/strong&gt; (http)
+2015-05-27 16:39:32.426  INFO 51056 --- [main] o.apache.catalina.core.StandardService   : Starting service Tomcat
+2015-05-27 16:39:32.428  INFO 51056 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.0.20</code></pre>
+</div>
+</div>
+<h1 id="_3_parler_micro_services_c_est_bien_en_faire_c_est_mieux" class="sect0">3 - Parler Micro-Services c&#8217;est bien, en faire c&#8217;est mieux</h1>
+<div class="paragraph">
+<p>Je ne ferai pas de présentation des Micro-Services ici mais constatons que ces derniers ont cette facheuse tendance à faire parler les gens plutôt qu'à les faire coder (ben oui, "coder, c&#8217;est sale"). Il partage d&#8217;ailleurs ce biais avec son lointain ancêtre/collègue/"mettez ce que vous voulez" SOA. Il faut dire qu'à l'époque SOA (il y a 5-10 ans donc), il fallait faire avec SOAP, les ESB (EAI rebrandés) et autre Messaging préhistoriques ; il valait mieux en parler qu&#8217;en faire.</p>
+</div>
+<div class="paragraph">
+<p>Mais maintenant tout n&#8217;a pas changé mais nous avons enfin les technologies nous permettant de mettre en place l&#8217;ensemble des architectures/solutions rêvées il y a quelques années (relisez &lt;a href="http://shop.oreilly.com/product/9780596006754.do"&gt;Entreprise Service Bus&lt;/a&gt; : le livre a plus de 10 ans, si c&#8217;est pas du MicroServices, ça y ressemble).</p>
+</div>
+<div class="paragraph">
+<p>Plus d&#8217;excuse pour ne plus en faire : Spring Boot est un très bon point d&#8217;entrée pour mettre en oeuvre une architecture MicroServices : simplicité, légèreté &#8230;&#8203;</p>
+</div>
+<h1 id="_4_plus_besoin_de_script_de_gestion_des_environnements" class="sect0">4 - Plus besoin de script de gestion des environnements</h1>
+<div class="paragraph">
+<p>Oui vous savez cette saleté de script que vous maintenez depuis plusieurs années qui copie/colle des propriétés dans des templates de configuration, ces templates pas à jour.</p>
+</div>
+<div class="paragraph">
+<p>Spring Boot reprend bien entendu le principe de profils apparu il y a plusieurs années dans Spring mais le rend plus simple à mettre en oeuvre (on se répète).</p>
+</div>
+<div class="paragraph">
+<p>Il est ainsi possible d&#8217;amender n&#8217;importe quel composant (@Component) ou configuration (@Configuration) afin de les associer à un ou plusieurs profils et ainsi de les "activer" ou non selon le profil actif. Cela peut-être notamment utile pour activer des services "mockés" pour les profils de test.</p>
+</div>
+<div class="paragraph">
+<p>Il est également possible de "superposer" au fichier de configuration par défaut un fichier de configuration par profil afin d&#8217;ajouter ou de surcharger des propriétés.</p>
+</div>
+<div class="paragraph">
+<p>Par exemple, prenons la configuration par défaut suivante (application.yml) :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code>server:
+    port: 9090
+-----
+
+et le configuration de test suivante (application-test.yml) :
+
+[source]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>server:
+    port: 9292
+logging:
+    level:
+        org.springframework: DEBUG</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>Si nus lançons l'application sans paramètre supplémentaire, la première configuration sera appliquée : port HTTP = 9090 et level log = INFO (valeur par défaut de Spring Boot) ; par contre, si nous lançons l'application avec le paramètre suivant _--spring.profiles.active=test_, alors la configuration suivante sera appliqué : port HTTP = 9292 et level log = DEBUG.
+
+5 - Plus de serveur d'application...ou presque
+==============================================
+
+Finie la galère du déploiement avec Spring Boot. En effet, bien qu'il soit possible de packager de manière classsique votre application dans un fichier war pour le déployer au sein de votre serveur d'application [blue line-through]*imposé* chéri, le packaging par défaut un jar "self-contained" (jar exécutable contenant l'ensemble des dépendances de l'application).
+
+Ce jar contient notamment l'ensemble des librairies Tomcat (ou Jetty - ce sont les seuls containeurs gérés par défaut) permettant de lancer le serveur d'application nécessaire à l'exécution de l'application.
+
+Bien sûr, il n'est pas évident de se faire à cette idée après plusieurs années de déploiement lourd sous containeur mais cela à de nombreux avantages :
+
+* Simplicité de déploiement (le seul prérequis est Java).
+* Cloud-ready.
+* Contournement des référentiels système - il est courant que l'on vous impose un serveur d'application (pas le plus léger normalement), il est plus rare que l'on vous empêche de lancer un simple processus Java.</pre>
+</div>
+</div>
+        </section>
+
+    
+        <section class="post-comments">
+          <h3 id="reply-title" class="comment-reply-title">Laisser un commentaire</h3>
+          <div id="disqus_thread"></div>
+          <script type="text/javascript">
+          var disqus_shortname = 'ellixo-blog'; // required: replace example with your forum shortname
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+          </script>
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </section>
+    
+    </article>
+
+</main>
+    <footer class="animated fadeIn" id="footer">
+        <section class="colophon">
+          <section class="copyright">Copyright &copy; <a href="http://www.ellixo.com">Ellixo</a> All Rights Reserved - Published with <a class="icon-ghost" href="http://hubpress.io">HubPress</a></section>
+        </section>
+        <section class="bottom">
+          <section class="attribution">
+            <a href="http://www.ellixo.com">Accueil Ellixo</a> - <a href="http://www.ellixo.com/mentions-blog.html">Mentions Légales</a>
+          </section>
+        </section>
+    </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js?v="></script> 
+      <script type="text/javascript">
+        jQuery( document ).ready(function() {
+          // change date with ago
+          jQuery('ago.ago').each(function(){
+            var element = jQuery(this).parent();
+            element.html( moment(element.text()).fromNow());
+          });
+        });
+
+        hljs.initHighlightingOnLoad();      
+      </script>
+    <script src="//blog.ellixo.com/themes/Ellixo/assets/js/scripts.js?v=1.0.0"></script>
+    
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-63513484-1', 'auto');
+    ga('send', 'pageview');
+
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>

@@ -51,4 +51,105 @@ security:
         password: password
 ----
 
-HTTPS est maintenant disponible ; voilà votre application sécurisée en 5 minutes. 
+HTTPS est maintenant disponible ; voilà votre application sécurisée en 5 minutes.
+
+7 - La boîte à outils du parfait petit intégrateur
+==================================================
+
+Les démos ou tutoriaux que vous pourrez trouver sur le web fournissent la plupart du temps une API REST simple (cf. point 1). Bien sûr, Spring Boot va beaucoup plus loin en fournissant de nombreux connecteurs :
+
+* Bases relationnelles : JDBC, JPA, JdbcTemplate
+* Bases NoSQL : Redis, MongoDB, ElasticSearch ...
+* Messaging : JMS
+
+Il est bien sûr possible d'intégrer n'importe quelle librairie externe mais les connecteurs "Spring Boot" simplifieront la mise en oeuvre et la configuration des systèmes au sein de l'application.
+
+Nous allons faire évoluer notre application pour stocker les logs dans une base MongoDB.
+
+*Pour éviter d'installer MongoDB et simplifier les tests de l'application, nous allons utiliser une instance embarquée à l'aide de la librairie <a href="https://github.com/flapdoodle-oss/de.flapdoodle.embed.mongo">Mongo Embed Flapdoodle</a> (remarque : nous associons cette base embarquée au profil "test" pour éviter son exécution sur un autre profil, production par exemple) :
+
+[source,java]
+----
+@Component
+@Profile("test")
+public class MongoDBEmbed {
+
+    private MongodExecutable mongodExecutable;
+
+    @PostConstruct
+    public void start() {
+        MongodStarter starter = MongodStarter.getDefaultInstance();
+
+        try {
+            IMongodConfig mongodConfig = new MongodConfigBuilder()
+                    .version(Version.Main.PRODUCTION)
+                    .net(new Net(27017,false))
+                    .build();
+            mongodExecutable = starter.prepare(mongodConfig);
+            mongodExecutable.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @PreDestroy
+    public void stop() {
+        if (mongodExecutable != null) {
+            mongodExecutable.stop();
+        }
+    }
+
+}
+----
+	
+Nous mettons à jour notre service REST en injectant une factory MongoDB et en sauvegardant l'ensemble des réponses API. Nous en profitons également pour ajouter une nouvelle opération renvoyant l'ensemble des logs pour tester la sauvegarde :
+
+[source,java]
+----
+@RestController
+@RequestMapping("/api")
+public class RestServices {
+
+    @Autowired
+    private MongoDbFactory mongo;
+
+    @RequestMapping(method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String ping() {
+        String status = "{\"status\":\"OK\",\"timestamp\":\"" + System.currentTimeMillis() + "\"}";
+
+        DBObject dbObject = (DBObject) JSON.parse(status);
+        mongo.getDb().getCollection("logs").insert(dbObject);
+
+        return status;
+    }
+
+    @RequestMapping(value = "logs", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String logs() {
+        DBCursor cursor = mongo.getDb().getCollection("logs").find();
+
+        StringBuilder sb = new StringBuilder();
+        while (cursor.hasNext()) {
+            sb.append(cursor.next());
+        }
+
+        return sb.toString();
+    }
+
+}
+----
+	
+Il n'y a plus qu'à tester :
+
+[source,bash]
+----
+~$ curl -k https://user:password@localhost:9292/api
+{"status":"OK","timestamp":"1432759655293"}
+~$ curl -k https://user:password@localhost:9292/api
+{"status":"OK","timestamp":"1432759658078"}
+~$curl -k https://user:password@localhost:9292/api/logs
+{ "_id" : { "$oid" : "55662d67e026541721386250"} , "status" : "OK" , "timestamp" : "1432759655293"}{ "_id" : { "$oid" : "55662d6ae026541721386251"} , "status" : "OK" , "timestamp" : "1432759658078"}
+----

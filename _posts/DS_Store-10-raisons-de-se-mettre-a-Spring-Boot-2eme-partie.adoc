@@ -1,2 +1,54 @@
 = 10 raisons de se mettre à Spring Boot (2ème partie)
 :hp-tags: Spring Boot
+
+6 - La sécurité pour les nuls
+=============================
+
+La mise en oeuvre de mécanisme de sécurité est primordial ; pour autant, il s'agit toujours d'une étape fastidieuse que l'on a tendance à repousser. Spring Boot (encore une fois) nous simplifie la tâche. 
+
+Prenons la mise en oeuvre d'une politique de sécurité simple et classique mais relativement performante : Authentication Basic + HTTPS.
+
+- 1ère étape : HTTP Basic authentication
+
+Ce mode d'authentification nécessite de fournir lors de l'appel d'une URL un nom d'utilisateur accompagné de son mot de passe. Dans Spring Boot, pour mettre en oeuvre ce mécanisme, il suffit de :
+
+[circle]
+* ajouter la dépendance _org.springframework.boot.spring-boot-starter-security_ au fichier POM
+* ajouter la propriété security.user.password spécifiant le mot de passe de l'utilisateur par défaut (ie. _user_)
+
+Dès lors, tout appel aux URL de l'application nécessite une authentification :
+
+[source,bash]
+----
+~$ curl http://localhost:9292/api
+{"timestamp":1432745548802,"status":401,"error":"Unauthorized","message":"Full authentication is required to access this resource","path":"/api"}
+
+~$ curl http://user:bad_password@localhost:9292/api
+{"timestamp":1432745622513,"status":401,"error":"Unauthorized","message":"Bad credentials","path":"/api"}
+
+~$ curl http://user:password@localhost:9292/api
+{"status":"OK","timestamp":"1432745645639"}
+----
+
+* 2ème étape : HTTPS
+
+L'authentification _Basic_ possède un défaut majeur : elle nécessite de faire transiter le mot de passe en clair. Pallions cela en cryptant les communications via HTTPS. Encore une fois, Spring Boot a tout prévu :
+
+[circle]
+* Ajout d'un repository de certificats (ie. fichier https://docs.oracle.com/cd/E19509-01/820-3503/ggfen/index.html[.jks]) dans l'arborescence de l'application
+* Configuration des propriétés du repository
+
+[source,java]
+----
+server:
+    port: 9292
+    ssl:
+        key-store: classpath:keystore.jks
+        key-store-password: password
+        key-password: password
+security:
+    user:
+        password: password
+----
+
+HTTPS est maintenant disponible ; voilà votre application sécurisée en 5 minutes. 

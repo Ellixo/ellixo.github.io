@@ -38,7 +38,7 @@ L'authentification _Basic_ possède un défaut majeur : elle nécessite de faire
 * Ajout d'un repository de certificats (ie. fichier https://docs.oracle.com/cd/E19509-01/820-3503/ggfen/index.html[.jks]) dans l'arborescence de l'application
 * Configuration des propriétés du repository
 
-[source,java]
+[source,yaml]
 ----
 server:
     port: 9292
@@ -180,3 +180,50 @@ Enfin il nous reste à construire l'image puis à l'exécuter (et à tester) :
 ~$ docker build -t ellixo/springboot .
 ~$ docker run -d -p=9292:9292 ellixo/springboot
 ----
+
+9 - Vous pouvez même le mettre en production
+============================================
+
+On l'a vu dans les précédents points, SpringBoot simplifie grandement la mise en production de votre application : sécurité, "dockerisation", déploiement ... 
+
+Pour aller plus loin, il est possible d'installer le module Actuator qui fournit de nombreuses fonctionnalités d'administation système (via notamment une API Rest) :
+
+* health : fournit des données permettant de vérifier l'état de l'application (UP/DOWN, état disque, état systèmes externes ...)
+* metrics : fournit des métriques processus (threads, CPU, mémoire ...)
+* trace : fournit les informations des dernières connexions HTTP applicatives ...
+
+Libre à vous ensuite de connecter ce module à l'outil de monitoring du système d'information (Graphite, Promotheus ...)
+
+[source,bash]
+Exemple : API Health
+----
+~$ curl http://user:password@localhost:9292/health
+{"status":"UP","diskSpace":{"status":"UP","free":169718296576,"threshold":10485760},"mongo":{"status":"UP","version":"3.0.2"}}
+----
+
+10 - Mon client veut du Cloud...pas de soucis
+=============================================
+
+Encore une fois, le fait qu'une application Spring Boot embarque son propre containeur (Tomcat ou Jetty par défaut donc) simplifie un déploiement cloud.
+
+Pour démontrer le rapidité du processus, j'ai décidé d'exposer le déploiement sous la plateforme Cloud Foundry de Pivotal (à tout seigneur, tout honneur) :
+
+* Une fois votre compte Pivotal Web Services créé et le client associé installé, la seule commande à exécuter sur votre environnement est :
+
+[source,bash]
+----
+~$ cf push springboot-demo -p springboot-1.0-SNAPSHOT.jar
+...
+Uploading app files from: springboot-1.0-SNAPSHOT.jar
+Uploading 623.8K, 96 files
+Done uploading
+OK
+----
+	
+* Par défaut, Cloud Foundry prend en compte le profil "cloud" ; pour autant, il est possible d'activer un autre profil en positionnant la variable d'environnement JAVA_OPTS (exemple : -Dspring.profiles.active=test)
+
+* L'application est alors disponible via l'URL _nom_app.cfapps.io_ (\http://springboot-demo.cfapps.io ici)
+
+====
+Les sources des exemples sont disponibles sur le https://github.com/Ellixo/springboot-demo[Repository GitHub Ellixo]
+====

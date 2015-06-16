@@ -66,7 +66,7 @@ Il est bien sûr possible d'intégrer n'importe quelle librairie externe mais le
 
 Nous allons faire évoluer notre application pour stocker les logs dans une base MongoDB.
 
-*Pour éviter d'installer MongoDB et simplifier les tests de l'application, nous allons utiliser une instance embarquée à l'aide de la librairie <a href="https://github.com/flapdoodle-oss/de.flapdoodle.embed.mongo">Mongo Embed Flapdoodle</a> (remarque : nous associons cette base embarquée au profil "test" pour éviter son exécution sur un autre profil, production par exemple) :
+. Pour éviter d'installer MongoDB et simplifier les tests de l'application, nous allons utiliser une instance embarquée à l'aide de la librairie https://github.com/flapdoodle-oss/de.flapdoodle.embed.mongo[Mongo Embed Flapdoodle] (remarque : nous associons cette base embarquée au profil "test" pour éviter son exécution sur un autre profil, production par exemple) :
 
 [source,java]
 ----
@@ -102,7 +102,8 @@ public class MongoDBEmbed {
 }
 ----
 	
-Nous mettons à jour notre service REST en injectant une factory MongoDB et en sauvegardant l'ensemble des réponses API. Nous en profitons également pour ajouter une nouvelle opération renvoyant l'ensemble des logs pour tester la sauvegarde :
+[start=2]
+. Nous mettons à jour notre service REST en injectant une factory MongoDB et en sauvegardant l'ensemble des réponses API. Nous en profitons également pour ajouter une nouvelle opération renvoyant l'ensemble des logs pour tester la sauvegarde :
 
 [source,java]
 ----
@@ -141,8 +142,9 @@ public class RestServices {
 
 }
 ----
-	
-Il n'y a plus qu'à tester :
+
+[start=3]
+. Il n'y a plus qu'à tester :
 
 [source,bash]
 ----

@@ -155,3 +155,28 @@ public class RestServices {
 ~$curl -k https://user:password@localhost:9292/api/logs
 { "_id" : { "$oid" : "55662d67e026541721386250"} , "status" : "OK" , "timestamp" : "1432759655293"}{ "_id" : { "$oid" : "55662d6ae026541721386251"} , "status" : "OK" , "timestamp" : "1432759658078"}
 ----
+
+8 - Spring Boot et Docker...tout simple (évidemment)
+==========================================================
+
+On l'a vu plus tôt, la méthode privilégiée de déploiement consiste en un jar exécutable. Cela nous simplifie également la tâche pour "dockeriser" notre application. Le DockerFile correspondant est tout simple (oui encore !) :
+
+[source,java]
+----
+FROM java:8u45
+MAINTAINER Gregory Le Bonniec "gregory.le.bonniec@ellixo.com"
+
+ADD springboot-1.0-SNAPSHOT.jar app.jar
+
+ENTRYPOINT [ "java", "-Dspring.profiles.active=test", "-jar", "/app.jar" ]
+----
+
+Explications : Le jar est ajouté au DockerFile puis exécuté en positionnant le profil de test comme le profil actif.
+
+Enfin il nous reste à construire l'image puis à l'exécuter (et à tester) :
+
+[source,bash]
+----
+~$ docker build -t ellixo/springboot .
+~$ docker run -d -p=9292:9292 ellixo/springboot
+----

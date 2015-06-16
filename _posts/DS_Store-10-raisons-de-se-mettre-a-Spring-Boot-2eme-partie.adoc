@@ -157,11 +157,11 @@ public class RestServices {
 ----
 
 8 - Spring Boot et Docker...tout simple (évidemment)
-==========================================================
+====================================================
 
 On l'a vu plus tôt, la méthode privilégiée de déploiement consiste en un jar exécutable. Cela nous simplifie également la tâche pour "dockeriser" notre application. Le DockerFile correspondant est tout simple (oui encore !) :
 
-[source,java]
+[source,dockerfile]
 ----
 FROM java:8u45
 MAINTAINER Gregory Le Bonniec "gregory.le.bonniec@ellixo.com"

@@ -1,5 +1,5 @@
 = 10 raisons de se mettre à Spring Boot (2ème partie)
-:hp-tags: Spring Boot
+:hp-tags: Spring Boot, MongoDB, Cloud Foundry
 
 6 - La sécurité pour les nuls
 =============================

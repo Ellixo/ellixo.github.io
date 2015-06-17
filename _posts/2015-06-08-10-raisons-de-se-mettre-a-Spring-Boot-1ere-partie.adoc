@@ -132,7 +132,7 @@ Si nous lançons l'application sans paramètre supplémentaire, la première con
 5 - Plus de serveur d'application...ou presque
 ==============================================
 
-Finie la galère du déploiement avec Spring Boot. En effet, bien qu'il soit possible de packager de manière classsique votre application dans un fichier war pour le déployer au sein de votre serveur d'application [line-through]*imposé* chéri, le packaging par défaut un jar "self-contained" (jar exécutable contenant l'ensemble des dépendances de l'application).
+Finie la galère du déploiement avec Spring Boot. En effet, bien qu'il soit possible de packager de manière classique votre application dans un fichier war pour le déployer au sein de votre serveur d'application [line-through]*imposé* chéri, le packaging par défaut un jar "self-contained" (jar exécutable contenant l'ensemble des dépendances de l'application).
 
 Ce jar contient notamment l'ensemble des librairies Tomcat (ou Jetty - ce sont les seuls containeurs gérés par défaut) permettant de lancer le serveur d'application nécessaire à l'exécution de l'application.
 

@@ -1,5 +1,5 @@
 = Breizhcamp Saison 5
-:hp-tags: BreizhCamp, Conférences
+:hp-tags: BreizhCamp, Conférences (backup)
 
 La 5ème saison du http://www.breizhcamp.org/[Breizhcamp] a eu lieu du 10 au 12 juin dernier. Elle a réuni 2^8 (256 donc) personnes sur le campus de Beaulieu à Rennes. http://www.ellixo.com/[Ellixo] était bien évidemment présent et nous avons voulu partager avec vous nos impressions sur une partie des conférences (impossible malheureusement d'assister aux dizaines de conférences ayant eu lieu durant ces 3 jours)
 

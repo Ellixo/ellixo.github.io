@@ -1,0 +1,233 @@
+= 10 raisons de se mettre à Spring Boot (2ème partie)
+:hp-tags: Spring Boot, MongoDB, Cloud Foundry
+
+====
+La première partie de cet article est disponible http://blog.ellixo.com/2015/06/08/10-raisons-de-se-mettre-a-Spring-Boot-1ere-partie.html[ici]
+====
+
+6 - La sécurité pour les nuls
+=============================
+
+La mise en oeuvre de mécanisme de sécurité est primordial ; pour autant, il s'agit toujours d'une étape fastidieuse que l'on a tendance à repousser. Spring Boot (encore une fois) nous simplifie la tâche. 
+
+Prenons la mise en oeuvre d'une politique de sécurité simple et classique mais relativement performante : Authentication Basic + HTTPS.
+
+- 1ère étape : HTTP Basic authentication
+
+Ce mode d'authentification nécessite de fournir lors de l'appel d'une URL un nom d'utilisateur accompagné de son mot de passe. Dans Spring Boot, pour mettre en oeuvre ce mécanisme, il suffit de :
+
+[circle]
+* ajouter la dépendance _org.springframework.boot.spring-boot-starter-security_ au fichier POM
+* ajouter la propriété security.user.password spécifiant le mot de passe de l'utilisateur par défaut (ie. _user_)
+
+Dès lors, tout appel aux URL de l'application nécessite une authentification :
+
+[source,bash]
+----
+~$ curl http://localhost:9292/api
+{"timestamp":1432745548802,"status":401,"error":"Unauthorized","message":"Full authentication is required to access this resource","path":"/api"}
+
+~$ curl http://user:bad_password@localhost:9292/api
+{"timestamp":1432745622513,"status":401,"error":"Unauthorized","message":"Bad credentials","path":"/api"}
+
+~$ curl http://user:password@localhost:9292/api
+{"status":"OK","timestamp":"1432745645639"}
+----
+
+* 2ème étape : HTTPS
+
+L'authentification _Basic_ possède un défaut majeur : elle nécessite de faire transiter le mot de passe en clair. Pallions cela en cryptant les communications via HTTPS. Encore une fois, Spring Boot a tout prévu :
+
+[circle]
+* Ajout d'un repository de certificats (ie. fichier https://docs.oracle.com/cd/E19509-01/820-3503/ggfen/index.html[.jks]) dans l'arborescence de l'application
+* Configuration des propriétés du repository
+
+[source,yaml]
+----
+server:
+    port: 9292
+    ssl:
+        key-store: classpath:keystore.jks
+        key-store-password: password
+        key-password: password
+security:
+    user:
+        password: password
+----
+
+HTTPS est maintenant disponible ; voilà votre application sécurisée en 5 minutes.
+
+7 - La boîte à outils du parfait petit intégrateur
+==================================================
+
+Les démos ou tutoriaux que vous pourrez trouver sur le web fournissent la plupart du temps une API REST simple (cf. point 1). Bien sûr, Spring Boot va beaucoup plus loin en fournissant de nombreux connecteurs :
+
+* Bases relationnelles : JDBC, JPA, JdbcTemplate
+* Bases NoSQL : Redis, MongoDB, ElasticSearch ...
+* Messaging : JMS
+
+Il est bien sûr possible d'intégrer n'importe quelle librairie externe mais les connecteurs "Spring Boot" simplifieront la mise en oeuvre et la configuration des systèmes au sein de l'application.
+
+Nous allons faire évoluer notre application pour stocker les logs dans une base MongoDB.
+
+. Pour éviter d'installer MongoDB et simplifier les tests de l'application, nous allons utiliser une instance embarquée à l'aide de la librairie https://github.com/flapdoodle-oss/de.flapdoodle.embed.mongo[Mongo Embed Flapdoodle] (remarque : nous associons cette base embarquée au profil "test" pour éviter son exécution sur un autre profil, production par exemple) :
+
+[source,java]
+----
+@Component
+@Profile("test")
+public class MongoDBEmbed {
+
+    private MongodExecutable mongodExecutable;
+
+    @PostConstruct
+    public void start() {
+        MongodStarter starter = MongodStarter.getDefaultInstance();
+
+        try {
+            IMongodConfig mongodConfig = new MongodConfigBuilder()
+                    .version(Version.Main.PRODUCTION)
+                    .net(new Net(27017,false))
+                    .build();
+            mongodExecutable = starter.prepare(mongodConfig);
+            mongodExecutable.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @PreDestroy
+    public void stop() {
+        if (mongodExecutable != null) {
+            mongodExecutable.stop();
+        }
+    }
+
+}
+----
+	
+[start=2]
+. Nous mettons à jour notre service REST en injectant une factory MongoDB et en sauvegardant l'ensemble des réponses API. Nous en profitons également pour ajouter une nouvelle opération renvoyant l'ensemble des logs pour tester la sauvegarde :
+
+[source,java]
+----
+@RestController
+@RequestMapping("/api")
+public class RestServices {
+
+    @Autowired
+    private MongoDbFactory mongo;
+
+    @RequestMapping(method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String ping() {
+        String status = "{\"status\":\"OK\",\"timestamp\":\"" + System.currentTimeMillis() + "\"}";
+
+        DBObject dbObject = (DBObject) JSON.parse(status);
+        mongo.getDb().getCollection("logs").insert(dbObject);
+
+        return status;
+    }
+
+    @RequestMapping(value = "logs", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String logs() {
+        DBCursor cursor = mongo.getDb().getCollection("logs").find();
+
+        StringBuilder sb = new StringBuilder();
+        while (cursor.hasNext()) {
+            sb.append(cursor.next());
+        }
+
+        return sb.toString();
+    }
+
+}
+----
+
+[start=3]
+. Il n'y a plus qu'à tester :
+
+[source,bash]
+----
+~$ curl -k https://user:password@localhost:9292/api
+{"status":"OK","timestamp":"1432759655293"}
+~$ curl -k https://user:password@localhost:9292/api
+{"status":"OK","timestamp":"1432759658078"}
+~$curl -k https://user:password@localhost:9292/api/logs
+{ "_id" : { "$oid" : "55662d67e026541721386250"} , "status" : "OK" , "timestamp" : "1432759655293"}{ "_id" : { "$oid" : "55662d6ae026541721386251"} , "status" : "OK" , "timestamp" : "1432759658078"}
+----
+
+8 - Spring Boot et Docker...tout simple (évidemment)
+====================================================
+
+On l'a vu plus tôt, la méthode privilégiée de déploiement consiste en un jar exécutable. Cela nous simplifie également la tâche pour "dockeriser" notre application. Le DockerFile correspondant est tout simple (oui encore !) :
+
+[source,dockerfile]
+----
+FROM java:8u45
+MAINTAINER Gregory Le Bonniec "gregory.le.bonniec@ellixo.com"
+
+ADD springboot-1.0-SNAPSHOT.jar app.jar
+
+ENTRYPOINT [ "java", "-Dspring.profiles.active=test", "-jar", "/app.jar" ]
+----
+
+Explications : Le jar est ajouté au DockerFile puis exécuté en positionnant le profil de test comme le profil actif.
+
+Enfin il nous reste à construire l'image puis à l'exécuter (et à tester) :
+
+[source,bash]
+----
+~$ docker build -t ellixo/springboot .
+~$ docker run -d -p=9292:9292 ellixo/springboot
+----
+
+9 - Vous pouvez même le mettre en production
+============================================
+
+On l'a vu dans les précédents points, SpringBoot simplifie grandement la mise en production de votre application : sécurité, "dockerisation", déploiement ... 
+
+Pour aller plus loin, il est possible d'installer le module Actuator qui fournit de nombreuses fonctionnalités d'administation système (via notamment une API Rest) :
+
+* health : fournit des données permettant de vérifier l'état de l'application (UP/DOWN, état disque, état systèmes externes ...)
+* metrics : fournit des métriques processus (threads, CPU, mémoire ...)
+* trace : fournit les informations des dernières connexions HTTP applicatives ...
+
+Libre à vous ensuite de connecter ce module à l'outil de monitoring du système d'information (Graphite, Promotheus ...)
+
+[source,bash]
+Exemple : API Health
+----
+~$ curl http://user:password@localhost:9292/health
+{"status":"UP","diskSpace":{"status":"UP","free":169718296576,"threshold":10485760},"mongo":{"status":"UP","version":"3.0.2"}}
+----
+
+10 - Mon client veut du Cloud...pas de soucis
+=============================================
+
+Encore une fois, le fait qu'une application Spring Boot embarque son propre containeur (Tomcat ou Jetty par défaut donc) simplifie un déploiement cloud.
+
+Pour démontrer le rapidité du processus, j'ai décidé d'exposer le déploiement sous la plateforme Cloud Foundry de Pivotal (à tout seigneur, tout honneur) :
+
+* Une fois votre compte Pivotal Web Services créé et le client associé installé, la seule commande à exécuter sur votre environnement est :
+
+[source,bash]
+----
+~$ cf push springboot-demo -p springboot-1.0-SNAPSHOT.jar
+...
+Uploading app files from: springboot-1.0-SNAPSHOT.jar
+Uploading 623.8K, 96 files
+Done uploading
+OK
+----
+	
+* Par défaut, Cloud Foundry prend en compte le profil "cloud" ; pour autant, il est possible d'activer un autre profil en positionnant la variable d'environnement JAVA_OPTS (exemple : -Dspring.profiles.active=test)
+
+* L'application est alors disponible via l'URL _nom_app.cfapps.io_ (\http://springboot-demo.cfapps.io ici)
+
+====
+Les sources des exemples sont disponibles sur le https://github.com/Ellixo/springboot-demo[Repository GitHub Ellixo]
+====

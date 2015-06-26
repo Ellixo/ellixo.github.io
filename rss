@@ -5,27 +5,36 @@
     <link>http://blog.ellixo.com</link>
     <description>Le Blog d'Ellixo</description>
     <language>en-UK</language>
-    <pubDate>Fri, 26 Jun 2015 15:53:15 GMT</pubDate>
+    <pubDate>Fri, 26 Jun 2015 16:05:25 GMT</pubDate>
     <dc:creator>info@ellixo.com</dc:creator>
-    <dc:date>2015-06-26T15:53:15Z</dc:date>
+    <dc:date>2015-06-26T16:05:25Z</dc:date>
     <dc:language>en-UK</dc:language>
     <item>
       <title>10 raisons de se mettre à Spring Boot (1ère partie)</title>
       <link>http://blog.ellixo.com/2015/06/08/10-raisons-de-se-mettre-a-Spring-Boot-1ere-partie.html</link>
       <description>1 - Vous réconcilier avec Spring Je travaille depuis plusieurs semaines avec Spring Boot. Je dois avouer que l&amp;#8217;idée de mettre en place ce nouvel outil ne m&amp;#8217;enchantait gère. Bien sûr j&amp;#8217;avais eu de...</description>
       <category>Spring Boot</category>
-      <pubDate>Thu, 18 Jun 2015 22:26:28 GMT</pubDate>
+      <pubDate>Fri, 26 Jun 2015 17:57:13 GMT</pubDate>
       <guid>http://blog.ellixo.com/2015/06/08/10-raisons-de-se-mettre-a-Spring-Boot-1ere-partie.html</guid>
-      <dc:date>2015-06-18T22:26:28Z</dc:date>
+      <dc:date>2015-06-26T17:57:13Z</dc:date>
     </item>
     <item>
       <title>Breizhcamp - Saison 5</title>
       <link>http://blog.ellixo.com/2015/06/19/Breizhcamp-Saison-5.html</link>
-      <description>La 5ème saison du Breizhcamp a eu lieu du 10 au 12 juin dernier. Elle a réuni 2 puissance 8 (256 donc) personnes sur le campus de Beaulieu à Rennes. Ellixo était bien évidemment présent et nous avons voulu partager avec vous...</description>
+      <description>La 5ème saison du Breizhcamp a eu lieu du 10 au 12 juin dernier. Elle a réuni 28 (256 donc) personnes sur le campus de Beaulieu à Rennes. Ellixo était bien évidemment présent et nous avons voulu partager avec vous...</description>
       <category>BreizhCamp</category>
-      <pubDate>Fri, 19 Jun 2015 18:01:30 GMT</pubDate>
+      <pubDate>Fri, 26 Jun 2015 17:57:13 GMT</pubDate>
       <guid>http://blog.ellixo.com/2015/06/19/Breizhcamp-Saison-5.html</guid>
-      <dc:date>2015-06-19T18:01:30Z</dc:date>
+      <dc:date>2015-06-26T17:57:13Z</dc:date>
+    </item>
+    <item>
+      <title>10 raisons de se mettre à Spring Boot (2ème partie)</title>
+      <link>http://blog.ellixo.com/2015/06/26/10-raisons-de-se-mettre-a-Spring-Boot-2eme-partie.html</link>
+      <description>La première partie de cet article est disponible ici 6 - La sécurité pour les nuls La mise en oeuvre de mécanisme de sécurité est primordial ; pour autant, il s&amp;#8217;agit toujours d&amp;#8217;une étape fastidieuse que l&amp;...</description>
+      <category>Spring Boot</category>
+      <pubDate>Fri, 26 Jun 2015 18:03:48 GMT</pubDate>
+      <guid>http://blog.ellixo.com/2015/06/26/10-raisons-de-se-mettre-a-Spring-Boot-2eme-partie.html</guid>
+      <dc:date>2015-06-26T18:03:48Z</dc:date>
     </item>
   </channel>
 </rss>

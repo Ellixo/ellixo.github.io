@@ -228,3 +228,6 @@ OK
 
 * L'application est alors disponible via l'URL _nom_app.cfapps.io_ (\http://springboot-demo.cfapps.io ici)
 
+====
+Les sources des exemples sont disponibles sur le https://github.com/Ellixo/springboot-demo[Repository GitHub Ellixo]
+====

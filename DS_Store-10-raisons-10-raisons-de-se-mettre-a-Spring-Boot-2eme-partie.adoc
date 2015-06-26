@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>10 raisons de se mettre à Spring Boot (2ème partie)</title>
+    <meta name="description" content="" />
+    <link rel="alternate" hreflang="fr" href="http://blog.ellixo.com/" />
+    <link href="//fonts.googleapis.com/css?family=Noto+Sans:300,400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic" rel="stylesheet" type="text/css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="//blog.ellixo.com/themes/Ellixo/assets/css/style.css?v=1.0.0" rel="stylesheet" type="text/css">
+    <link href="//blog.ellixo.com/themes/Ellixo/assets/css/animate.min.css?v=1.0.0" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/default.min.css">
+    <link href="//blog.ellixo.com/themes/Ellixo/favicon.ico" rel="shortcut icon">
+    <link rel="canonical" href="http://blog.ellixo.comDS_Store-10-raisons-10-raisons-de-se-mettre-a-Spring-Boot-2eme-partie.adoc" />
+    
+    <meta property="og:site_name" content="Blog Ellixo" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="10 raisons de se mettre à Spring Boot (2ème partie)" />
+    <meta property="og:description" content="La première partie de cet article est disponible ici 6 - La sécurité pour les nuls La mise en oeuvre de mécanisme de sécurité est primordial ; pour autant, il s&amp;#8217;agit toujours d&amp;#8217;une étape fastidieuse que l&amp;..." />
+    <meta property="og:url" content="http://blog.ellixo.comDS_Store-10-raisons-10-raisons-de-se-mettre-a-Spring-Boot-2eme-partie.adoc" />
+    <meta property="article:published_time" content="Invalid date" />
+    <meta property="article:modified_time" content="2015-06-26T15:58:09.992Z" />
+    <meta property="article:tag" content="Spring Boot" />
+    <meta property="article:tag" content="MongoDB" />
+    <meta property="article:tag" content="Cloud Foundry" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="10 raisons de se mettre à Spring Boot (2ème partie)" />
+    <meta name="twitter:description" content="La première partie de cet article est disponible ici 6 - La sécurité pour les nuls La mise en oeuvre de mécanisme de sécurité est primordial ; pour autant, il s&amp;#8217;agit toujours d&amp;#8217;une étape fastidieuse que l&amp;..." />
+    <meta name="twitter:url" content="http://blog.ellixo.comDS_Store-10-raisons-10-raisons-de-se-mettre-a-Spring-Boot-2eme-partie.adoc" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "Blog Ellixo",
+    "author": {
+        "@type": "Person",
+        "name": "Grégory Le Bonniec",
+        "image": "https://avatars.githubusercontent.com/u/9615799?v=3",
+        "url": "undefined/author/undefined",
+        "sameAs": ""
+    },
+    "headline": "10 raisons de se mettre à Spring Boot (2ème partie)",
+    "url": "http://blog.ellixo.comDS_Store-10-raisons-10-raisons-de-se-mettre-a-Spring-Boot-2eme-partie.adoc",
+    "datePublished": "Invalid date",
+    "dateModified": "2015-06-26T15:58:09.992Z",
+    "keywords": "Spring Boot,  MongoDB,  Cloud Foundry",
+    "description": "La première partie de cet article est disponible ici 6 - La sécurité pour les nuls La mise en oeuvre de mécanisme de sécurité est primordial ; pour autant, il s&amp;#8217;agit toujours d&amp;#8217;une étape fastidieuse que l&amp;..."
+}
+    </script>
+
+    <meta name="generator" content="Ghost ?" />
+    <link rel="alternate" type="application/rss+xml" title="Blog Ellixo" href="http://blog.ellixo.com/rss" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+</head>
+<body class="post-template tag-Spring-Boot tag-MongoDB tag-Cloud-Foundry">
+    <header id="header" class="animated fadeIn">
+    <div class="header-background">
+    <section class="blog-content">
+        <a href="http://blog.ellixo.com"><img src="/images/logo_w.png" class="logo"/></a>
+        <span class="blog-description">Le Blog d&#x27;Ellixo</span>
+        <nav class="links fadeIn animated">
+            <ul>
+                <!-- <li class="rss"><a title="RSS Feed" href="/rss/"><i class="fa fa-fw fa-rss-square"></i></a></li> -->
+        
+            </ul>
+        </nav>
+    </section>
+    <section class="header-content">
+        <h1 class="post-title animated fadeInUp">10 raisons de se mettre à Spring Boot (2ème partie)</h1>
+        <span class="post-data"><span class="date animated fadeInUp"><i class="fa fa-clock-o"></i> <time class="timesince date" data-timesince="Invalid date" datetime="Invalid date" title="Invalid date">Invalid date<ago class="ago"></time></span>
+            <span class="tags animated fadeInUp"><i class="fa fa-tags"></i> <a href="http://blog.ellixo.com/tag/Spring-Boot">Spring Boot</a>, <a href="http://blog.ellixo.com/tag/MongoDB"> MongoDB</a>, <a href="http://blog.ellixo.com/tag/Cloud-Foundry"> Cloud Foundry</a></span>
+            <span class="author animated fadeInUp"><i class="fa fa-user"></i> <a href="">Grégory Le Bonniec</a></span></span>
+    </section>
+    </div>
+</header>
+<main id="main" class="content">
+    <article itemtype="http://schema.org/BlogPosting" class="animated fadeIn content post post tag-Spring-Boot tag-MongoDB tag-Cloud-Foundry">
+        <section class="post-content">
+            <div id="preamble">
+<div class="sectionbody">
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>La première partie de cet article est disponible <a href="http://blog.ellixo.com/2015/06/08/10-raisons-de-se-mettre-a-Spring-Boot-1ere-partie.html">ici</a></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<h1 id="_6_la_s_curit_pour_les_nuls" class="sect0">6 - La sécurité pour les nuls</h1>
+<div class="paragraph">
+<p>La mise en oeuvre de mécanisme de sécurité est primordial ; pour autant, il s&#8217;agit toujours d&#8217;une étape fastidieuse que l&#8217;on a tendance à repousser. Spring Boot (encore une fois) nous simplifie la tâche.</p>
+</div>
+<div class="paragraph">
+<p>Prenons la mise en oeuvre d&#8217;une politique de sécurité simple et classique mais relativement performante : Authentication Basic + HTTPS.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>1ère étape : HTTP Basic authentication</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Ce mode d&#8217;authentification nécessite de fournir lors de l&#8217;appel d&#8217;une URL un nom d&#8217;utilisateur accompagné de son mot de passe. Dans Spring Boot, pour mettre en oeuvre ce mécanisme, il suffit de :</p>
+</div>
+<div class="ulist circle">
+<ul class="circle">
+<li>
+<p>ajouter la dépendance <em>org.springframework.boot.spring-boot-starter-security</em> au fichier POM</p>
+</li>
+<li>
+<p>ajouter la propriété security.user.password spécifiant le mot de passe de l&#8217;utilisateur par défaut (ie. <em>user</em>)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Dès lors, tout appel aux URL de l&#8217;application nécessite une authentification :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">~$ curl http://localhost:9292/api
+{"timestamp":1432745548802,"status":401,"error":"Unauthorized","message":"Full authentication is required to access this resource","path":"/api"}
+
+~$ curl http://user:bad_password@localhost:9292/api
+{"timestamp":1432745622513,"status":401,"error":"Unauthorized","message":"Bad credentials","path":"/api"}
+
+~$ curl http://user:password@localhost:9292/api
+{"status":"OK","timestamp":"1432745645639"}</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>2ème étape : HTTPS</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>L&#8217;authentification <em>Basic</em> possède un défaut majeur : elle nécessite de faire transiter le mot de passe en clair. Pallions cela en cryptant les communications via HTTPS. Encore une fois, Spring Boot a tout prévu :</p>
+</div>
+<div class="ulist circle">
+<ul class="circle">
+<li>
+<p>Ajout d&#8217;un repository de certificats (ie. fichier <a href="https://docs.oracle.com/cd/E19509-01/820-3503/ggfen/index.html">.jks</a>) dans l&#8217;arborescence de l&#8217;application</p>
+</li>
+<li>
+<p>Configuration des propriétés du repository</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-yaml" data-lang="yaml">server:
+    port: 9292
+    ssl:
+        key-store: classpath:keystore.jks
+        key-store-password: password
+        key-password: password
+security:
+    user:
+        password: password</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>HTTPS est maintenant disponible ; voilà votre application sécurisée en 5 minutes.</p>
+</div>
+<h1 id="_7_la_bo_te_outils_du_parfait_petit_int_grateur" class="sect0">7 - La boîte à outils du parfait petit intégrateur</h1>
+<div class="paragraph">
+<p>Les démos ou tutoriaux que vous pourrez trouver sur le web fournissent la plupart du temps une API REST simple (cf. point 1). Bien sûr, Spring Boot va beaucoup plus loin en fournissant de nombreux connecteurs :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Bases relationnelles : JDBC, JPA, JdbcTemplate</p>
+</li>
+<li>
+<p>Bases NoSQL : Redis, MongoDB, ElasticSearch &#8230;&#8203;</p>
+</li>
+<li>
+<p>Messaging : JMS</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Il est bien sûr possible d&#8217;intégrer n&#8217;importe quelle librairie externe mais les connecteurs "Spring Boot" simplifieront la mise en oeuvre et la configuration des systèmes au sein de l&#8217;application.</p>
+</div>
+<div class="paragraph">
+<p>Nous allons faire évoluer notre application pour stocker les logs dans une base MongoDB.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Pour éviter d&#8217;installer MongoDB et simplifier les tests de l&#8217;application, nous allons utiliser une instance embarquée à l&#8217;aide de la librairie <a href="https://github.com/flapdoodle-oss/de.flapdoodle.embed.mongo">Mongo Embed Flapdoodle</a> (remarque : nous associons cette base embarquée au profil "test" pour éviter son exécution sur un autre profil, production par exemple) :</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@Component
+@Profile("test")
+public class MongoDBEmbed {
+
+    private MongodExecutable mongodExecutable;
+
+    @PostConstruct
+    public void start() {
+        MongodStarter starter = MongodStarter.getDefaultInstance();
+
+        try {
+            IMongodConfig mongodConfig = new MongodConfigBuilder()
+                    .version(Version.Main.PRODUCTION)
+                    .net(new Net(27017,false))
+                    .build();
+            mongodExecutable = starter.prepare(mongodConfig);
+            mongodExecutable.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @PreDestroy
+    public void stop() {
+        if (mongodExecutable != null) {
+            mongodExecutable.stop();
+        }
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="2">
+<li>
+<p>Nous mettons à jour notre service REST en injectant une factory MongoDB et en sauvegardant l&#8217;ensemble des réponses API. Nous en profitons également pour ajouter une nouvelle opération renvoyant l&#8217;ensemble des logs pour tester la sauvegarde :</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@RestController
+@RequestMapping("/api")
+public class RestServices {
+
+    @Autowired
+    private MongoDbFactory mongo;
+
+    @RequestMapping(method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String ping() {
+        String status = "{\"status\":\"OK\",\"timestamp\":\"" + System.currentTimeMillis() + "\"}";
+
+        DBObject dbObject = (DBObject) JSON.parse(status);
+        mongo.getDb().getCollection("logs").insert(dbObject);
+
+        return status;
+    }
+
+    @RequestMapping(value = "logs", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String logs() {
+        DBCursor cursor = mongo.getDb().getCollection("logs").find();
+
+        StringBuilder sb = new StringBuilder();
+        while (cursor.hasNext()) {
+            sb.append(cursor.next());
+        }
+
+        return sb.toString();
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic" start="3">
+<li>
+<p>Il n&#8217;y a plus qu'à tester :</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">~$ curl -k https://user:password@localhost:9292/api
+{"status":"OK","timestamp":"1432759655293"}
+~$ curl -k https://user:password@localhost:9292/api
+{"status":"OK","timestamp":"1432759658078"}
+~$curl -k https://user:password@localhost:9292/api/logs
+{ "_id" : { "$oid" : "55662d67e026541721386250"} , "status" : "OK" , "timestamp" : "1432759655293"}{ "_id" : { "$oid" : "55662d6ae026541721386251"} , "status" : "OK" , "timestamp" : "1432759658078"}</code></pre>
+</div>
+</div>
+<h1 id="_8_spring_boot_et_docker_tout_simple_videmment" class="sect0">8 - Spring Boot et Docker&#8230;&#8203;tout simple (évidemment)</h1>
+<div class="paragraph">
+<p>On l&#8217;a vu plus tôt, la méthode privilégiée de déploiement consiste en un jar exécutable. Cela nous simplifie également la tâche pour "dockeriser" notre application. Le DockerFile correspondant est tout simple (oui encore !) :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-dockerfile" data-lang="dockerfile">FROM java:8u45
+MAINTAINER Gregory Le Bonniec "gregory.le.bonniec@ellixo.com"
+
+ADD springboot-1.0-SNAPSHOT.jar app.jar
+
+ENTRYPOINT [ "java", "-Dspring.profiles.active=test", "-jar", "/app.jar" ]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Explications : Le jar est ajouté au DockerFile puis exécuté en positionnant le profil de test comme le profil actif.</p>
+</div>
+<div class="paragraph">
+<p>Enfin il nous reste à construire l&#8217;image puis à l&#8217;exécuter (et à tester) :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">~$ docker build -t ellixo/springboot .
+~$ docker run -d -p=9292:9292 ellixo/springboot</code></pre>
+</div>
+</div>
+<h1 id="_9_vous_pouvez_m_me_le_mettre_en_production" class="sect0">9 - Vous pouvez même le mettre en production</h1>
+<div class="paragraph">
+<p>On l&#8217;a vu dans les précédents points, SpringBoot simplifie grandement la mise en production de votre application : sécurité, "dockerisation", déploiement &#8230;&#8203;</p>
+</div>
+<div class="paragraph">
+<p>Pour aller plus loin, il est possible d&#8217;installer le module Actuator qui fournit de nombreuses fonctionnalités d&#8217;administation système (via notamment une API Rest) :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>health : fournit des données permettant de vérifier l'état de l&#8217;application (UP/DOWN, état disque, état systèmes externes &#8230;&#8203;)</p>
+</li>
+<li>
+<p>metrics : fournit des métriques processus (threads, CPU, mémoire &#8230;&#8203;)</p>
+</li>
+<li>
+<p>trace : fournit les informations des dernières connexions HTTP applicatives &#8230;&#8203;</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Libre à vous ensuite de connecter ce module à l&#8217;outil de monitoring du système d&#8217;information (Graphite, Promotheus &#8230;&#8203;)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">Exemple : API Health
+----
+~$ curl http://user:password@localhost:9292/health
+{"status":"UP","diskSpace":{"status":"UP","free":169718296576,"threshold":10485760},"mongo":{"status":"UP","version":"3.0.2"}}
+----</code></pre>
+</div>
+</div>
+<h1 id="_10_mon_client_veut_du_cloud_pas_de_soucis" class="sect0">10 - Mon client veut du Cloud&#8230;&#8203;pas de soucis</h1>
+<div class="paragraph">
+<p>Encore une fois, le fait qu&#8217;une application Spring Boot embarque son propre containeur (Tomcat ou Jetty par défaut donc) simplifie un déploiement cloud.</p>
+</div>
+<div class="paragraph">
+<p>Pour démontrer le rapidité du processus, j&#8217;ai décidé d&#8217;exposer le déploiement sous la plateforme Cloud Foundry de Pivotal (à tout seigneur, tout honneur) :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Une fois votre compte Pivotal Web Services créé et le client associé installé, la seule commande à exécuter sur votre environnement est :</p>
+</li>
+</ul>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">~$ cf push springboot-demo -p springboot-1.0-SNAPSHOT.jar
+...
+Uploading app files from: springboot-1.0-SNAPSHOT.jar
+Uploading 623.8K, 96 files
+Done uploading
+OK</code></pre>
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Par défaut, Cloud Foundry prend en compte le profil "cloud" ; pour autant, il est possible d&#8217;activer un autre profil en positionnant la variable d&#8217;environnement JAVA_OPTS (exemple : -Dspring.profiles.active=test)</p>
+</li>
+<li>
+<p>L&#8217;application est alors disponible via l&#8217;URL <em>nom_app.cfapps.io</em> (http://springboot-demo.cfapps.io ici)</p>
+</li>
+</ul>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Les sources des exemples sont disponibles sur le <a href="https://github.com/Ellixo/springboot-demo">Repository GitHub Ellixo</a></p>
+</div>
+</div>
+</div>
+        </section>
+
+    
+        <section class="post-comments">
+          <h3 id="reply-title" class="comment-reply-title">Laisser un commentaire</h3>
+          <div id="disqus_thread"></div>
+          <script type="text/javascript">
+          var disqus_shortname = 'ellixo-blog'; // required: replace example with your forum shortname
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+          </script>
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </section>
+    
+    </article>
+
+</main>
+    <footer class="animated fadeIn" id="footer">
+        <section class="colophon">
+          <section class="copyright">Copyright &copy; <a href="http://www.ellixo.com">Ellixo</a> All Rights Reserved - Published with <a class="icon-ghost" href="http://hubpress.io">HubPress</a></section>
+        </section>
+        <section class="bottom">
+          <section class="attribution">
+            <a href="http://www.ellixo.com">Accueil Ellixo</a> - <a href="http://www.ellixo.com/mentions-blog.html">Mentions Légales</a>
+          </section>
+        </section>
+    </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js?v="></script> 
+      <script type="text/javascript">
+        jQuery( document ).ready(function() {
+          // change date with ago
+          jQuery('ago.ago').each(function(){
+            var element = jQuery(this).parent();
+            element.html( moment(element.text()).fromNow());
+          });
+        });
+
+        hljs.initHighlightingOnLoad();      
+      </script>
+    <script src="//blog.ellixo.com/themes/Ellixo/assets/js/scripts.js?v=1.0.0"></script>
+    
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-63938697-1', 'auto');
+    ga('send', 'pageview');
+
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>

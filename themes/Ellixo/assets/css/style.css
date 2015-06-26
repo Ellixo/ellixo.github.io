@@ -27,7 +27,7 @@
     text-decoration: line-through;
 }
 
-.exampleblock { background-color: #E3F6CE; border-color: #e0e0dc; -webkit-box-shadow: 0 1px 4px #e0e0dc; box-shadow: 0 1px 4px #e0e0dc; padding:10px 5px 10px 5px;}
+.exampleblock { background-color: #ECF8E0; border-color: #e0e0dc; -webkit-box-shadow: 0 1px 4px #e0e0dc; box-shadow: 0 1px 4px #e0e0dc; padding:10px 10px 10px 10px;}
 
 .exampleblock > .content > .paragraph > p {margin-bottom: 0px}
 

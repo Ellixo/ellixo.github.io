@@ -1,9 +1,9 @@
 = 10 raisons de se mettre à Spring Boot (2ème partie)
 :hp-tags: Spring Boot, MongoDB, Cloud Foundry
 
-----
+====
 La première partie de cet article est disponible http://blog.ellixo.com/2015/06/08/10-raisons-de-se-mettre-a-Spring-Boot-1ere-partie.html[ici]
-----
+====
 
 6 - La sécurité pour les nuls
 =============================

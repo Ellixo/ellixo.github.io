@@ -11,6 +11,10 @@ Tout d'abord, pourquoi monitorer vos applications ? La réponse est multiple et 
 Prometheus est un des derniers nés dans le domaine du monitoring (développé chez SoundCloud majoritairement en Go) - il vient ainsi marcher sur les plate-bandes de solutions comme Graphite mais avec une approche plus globale. 
 
 En effet, au-delà du stockage de métriques, Promotheus fournit :
-- une collecte active des métriques (ie. Prometheus collecte les données des systèmes monitorés via des endpoints fournis par ces derniers)
+- une collecte active des métriques (ie. Prometheus collecte les données des systèmes monitorés via des endpoints fournis par ces derniers - Prometheus fournit également un système de push pour les systèmes ne pouvant pas fournir de point d'entrée)
 - un système d'alerting (email, slack, webhook ...)
 - un gestionnaire de dashboard dédié (PromDash)
+- un modèle de données clé/valeur (système de labels permettant une identification fine des métriques)
+- un système simple de requêtage des métriques
+
+

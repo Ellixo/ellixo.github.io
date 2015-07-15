@@ -1,0 +1,13 @@
+= Introduction à Prometheus
+
+Tout d'abord, pourquoi monitorer vos applications ? La réponse est multiple et sera forcément lié à votre environnement de production et votre environnement métier :
+- Evolution de stocks
+- Impact des actions marketing sur les demandes client
+- Usage CPU, RAM
+- Temps de réponse des requêtages DB
+- Serveur Up/Down
+- ...
+
+Prometheus est un des derniers nés dans le domaine du monitoring - il vient ainsi marcher sur les plate-bandes de solutiond comme Graphite ou InfluxDB mais avec une approche plus riche et complète. L'objectif 
+
+En effet, au-delà du stockage de métriques 

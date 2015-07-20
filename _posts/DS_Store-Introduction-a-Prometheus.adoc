@@ -6,7 +6,7 @@ Prometheus
 
 http://prometheus.io/[Prometheus] est un des derniers nés dans le domaine du monitoring (développé chez SoundCloud majoritairement en Go) - il vient ainsi marcher sur les plate-bandes de solutions comme Graphite mais avec une approche globale.
 
-En effet, au-delà du stockage de métriques, Promotheus fournit :
+En effet, au-delà du stockage de métriques, Prometheus fournit :
 
 * une collecte active des métriques (ie. Prometheus collecte les données des systèmes monitorés via des endpoints fournis par ces derniers - Prometheus fournit également un système de push pour les systèmes ne pouvant pas fournir de point d'entrée)
 * un système d'alerting (email, slack, webhook ...)
@@ -142,7 +142,7 @@ Afin de simplifier l'opération, on peut bien sûr utiliser Docker (image *prom/
 
 [source,bash]
 ----
-~$ docker run -p 9090:9090 -v /localPath/promotheus/promotheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+~$ docker run -p 9090:9090 -v /localPath/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
 ----
 
 Prometheus est dès lors disponible localement sur port 9090.

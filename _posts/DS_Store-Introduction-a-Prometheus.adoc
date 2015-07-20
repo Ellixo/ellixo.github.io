@@ -4,9 +4,9 @@
 Prometheus
 ==========
 
-Prometheus est un des derniers nés dans le domaine du monitoring (développé chez SoundCloud majoritairement en Go) - il vient ainsi marcher sur les plate-bandes de solutions comme Graphite mais avec une approche globale.
+http://prometheus.io/[Prometheus] est un des derniers nés dans le domaine du monitoring (développé chez SoundCloud majoritairement en Go) - il vient ainsi marcher sur les plate-bandes de solutions comme Graphite mais avec une approche globale.
 
-En effet, au-delà du stockage de métriques, Promotheus fournit :
+En effet, au-delà du stockage de métriques, Prometheus fournit :
 
 * une collecte active des métriques (ie. Prometheus collecte les données des systèmes monitorés via des endpoints fournis par ces derniers - Prometheus fournit également un système de push pour les systèmes ne pouvant pas fournir de point d'entrée)
 * un système d'alerting (email, slack, webhook ...)
@@ -86,6 +86,8 @@ public class MetricsResource {
 }
 ----
 
+Remarque : par défaut, Prometheus lit les métriques d'un host donné via l'URL */metrics*. Il est bien sûr possible de surcharger la configuration pour utiliser une autre URL si vous ne pouvez/voulez pas fournir une URL */metrics*.
+
 Un appel à l'URL correspondante fournit la réponse suivante :
 
 [source]
@@ -110,6 +112,8 @@ bikes_available{station="ROTONDE"} 14
 
 2 - Configuration Prometheus
 
+Une fois la datasource disponible, il est nécessaire de configurer Prometheus afin de lui indiquer à minima l'URL de la source et le timing d'interrogation de cette dernière (*scrape_interval*) ; il suffit pour cela fournir un fichier au format YAML tel que celui-ci :
+
 [source,yaml]
 ----
 global:
@@ -133,4 +137,65 @@ scrape_configs:
 
 3 - Serveur Prometheus
 
+Une fois le fichier de configuration prêt et la datasource démarrée, il suffit de démarrer Prometheus afin de commencer le monitoring de notre application.
+Afin de simplifier l'opération, on peut bien sûr utiliser Docker (image *prom/prometheus*) :
+
+[source,bash]
+----
+~$ docker run -p 9090:9090 -v /localPath/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+----
+
+Prometheus est dès lors disponible localement sur port 9090.
+
+image::prometheus/Prometheus.png[]
+
+Sur la page d'accueil, on retrouve notamment la configuration fournie et surtout le endpoint metrics fourni via Spring Boot - on peut voir notamment si ce dernier est acessible (State "Healthy") et le temps passé depuis le dernier *scraping* (ie. récupération de métriques).
+
+Afin de tester la validité des sources monitorés, il est possible de les visualiser via la console ou le moteur de graphe de Prometheus (menu Graph) :
+
+- Affichage de l'ensemble des vélos disponibles à Rennes dans un tableau (mode console) - requête Prometheus : *bikes_available*
+
+image::prometheus/Prometheus-Graph1.png[]
+
+- Affichage de l'évolution des vélos disponibles à la station St-Anne (mode graph) - requête Prometheus : *bikes_available{station="SAINTE-ANNE"}*
+
+image::prometheus/Prometheus-Graph2.png[]
+
 4 - Dashboard PromDash
+
+Comme nous vous l'avons déjà dit, Prometheus fournit son propre moteur de DashBoard : PromDash. Il permet de fournir, à partir des métriques Prometheus, différents types de graphiques paramétrables selon vos besoins.
+
+Pour lancer le client PromDash, on passe une nouvelle fois via Docker (image *prom/promdash*) :
+
+[source,bash]
+----
+~$ docker run -v /tmp/prom:/tmp/prom -e DATABASE_URL=sqlite3:/tmp/prom/file.sqlite3 prom/promdash ./bin/rake db:migrate
+~$ docker run -p 3000:3000 -v /tmp/prom:/tmp/prom -e DATABASE_URL=sqlite3:/tmp/prom/file.sqlite3 prom/promdash
+----
+
+Remarque : la première commande permet d'initialiser localement la base de données de PromDash.
+
+Encore une fois, la configuration de PromDash est très simple :
+
+- Référencement du serveur Prometheus :
+
+image::prometheus/PromDash-Server.png[]
+
+- Création d'un nouveau Dashboard au sein d'un Directory :
+
+image::prometheus/PromDash-Dashboard.png[]
+
+- Une fois le Dashboard créée, il est alors possible de créer autant de graphiques que l'on désire - par exemple, un graphique affichant les vélos et slots disponibles à la station St-Anne :
+
+image::prometheus/PromDash-Graph.png[]
+
+- Il est alors possible de monitorer cette station depuis une URL dédiée :
+
+image::prometheus/PromDash-Monitoring.png[]
+
+Comme vous avez pu le voir, il est extrêmement simple et rapide (quelques minutes) de mettre en oeuvre un système de monitoring via Prometheus. Il est bon de rappeler qu'il est impensable de partir en production sans monitoring ; Prometheus peut donc vous aider sur ce point dès aujourd'hui.
+
+====
+Les sources de cet article sont disponibles sur le https://github.com/Ellixo/prometheus-demo[Repository GitHub Ellixo]
+====
+

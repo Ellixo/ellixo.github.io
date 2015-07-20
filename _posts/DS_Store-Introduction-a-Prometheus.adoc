@@ -35,6 +35,29 @@ Pour vous démontrer cela, nous nous appuierons sur l'Open Data du réseau de v�
 
 1 - Mise à disposition d'un Endpoint Prometheus
 
+[source,java]
+----
+@RestController
+@RequestMapping("/metrics")
+public class MetricsResource {
+
+    @RequestMapping(method = RequestMethod.GET, produces={"text/plain"})
+    public ResponseEntity<String> get() {
+        RestTemplate restTemplate = new RestTemplate();
+        Response response = restTemplate.getForObject("http://data.keolis-rennes.com/json/?version=2.0&key=PYM7IXA0P1M728I&cmd=getbikestations", Response.class);
+
+        StringBuilder metricsBuilder = new StringBuilder();
+        for (Station station : response.getOpendata().getAnswer().getData().getStations()) {
+            metricsBuilder.append("bikes_available{station=\"" + station.getName() + "\"} " + station.getBikesavailable() +"\n");
+            metricsBuilder.append("slots_available{station=\"" + station.getName() + "\"} " + station.getSlotsavailable() +"\n");
+        }
+
+        return new ResponseEntity<>(metricsBuilder.toString(), HttpStatus.OK);
+    }
+
+}
+----
+
 2 - Configuration Prometheus
 
 3 - Serveur Prometheus

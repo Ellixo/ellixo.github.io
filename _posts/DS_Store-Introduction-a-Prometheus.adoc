@@ -1,10 +1,13 @@
 = Introduction à Prometheus
 :hp-tags: Prometheus, Monitoring, Spring Boot, Docker
 
-==
+Prometheus
+==========
+
 Prometheus est un des derniers nés dans le domaine du monitoring (développé chez SoundCloud majoritairement en Go) - il vient ainsi marcher sur les plate-bandes de solutions comme Graphite mais avec une approche globale.
 
 En effet, au-delà du stockage de métriques, Promotheus fournit :
+
 * une collecte active des métriques (ie. Prometheus collecte les données des systèmes monitorés via des endpoints fournis par ces derniers - Prometheus fournit également un système de push pour les systèmes ne pouvant pas fournir de point d'entrée)
 * un système d'alerting (email, slack, webhook ...)
 * un gestionnaire de dashboard dédié (PromDash)
@@ -23,4 +26,17 @@ La réponse est multiple et sera forcément lié à votre environnement de produ
 * Serveur Up/Down
 * ...
 
+Mise en oeuvre
+==============
 
+Au-delà de nombreuses fonctionnalités offertes par Prometheus, l'un des principaux avantages de ce dernier est sa rapidité et sa facilité de mise en oeuvre.
+
+Pour vous démontrer cela, nous nous appuierons sur l'Open Data du réseau de vélo de Rennes Métropole. Nous allons monitorer l'ensemble des docks vélo de Rennes et visualiser  en temps réel les places et vélos disponibles pour chacun d'entre eux.
+
+1 - Mise à disposition d'un Endpoint Prometheus
+
+2 - Configuration Prometheus
+
+3 - Serveur Prometheus
+
+4 - Dashboard PromDash

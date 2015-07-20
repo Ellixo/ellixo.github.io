@@ -37,7 +37,7 @@ Pour vous démontrer cela, nous nous appuierons sur l'Open Data du réseau de v�
 
 Le format de données des métriques Prometheus est simple mais pour autant très souple (système de clé/valeur appelé label). Il est ainsi possible de modéliser différentes dimensions d'une même métrique via un ou plusieurs labels.
 
-Une métrique est modélisée par une ou plusieurs lignes ASCII contenant :
+Une métrique est modélisée par une ou plusieurs lignes en text/plain contenant :
 - le nom de la métrique
 - les labels de la métrique
 - la valeur de la métrique
@@ -72,7 +72,7 @@ public class MetricsResource {
     @RequestMapping(method = RequestMethod.GET, produces={"text/plain"})
     public ResponseEntity<String> get() {
         RestTemplate restTemplate = new RestTemplate();
-        Response response = restTemplate.getForObject("http://data.keolis-rennes.com/json/?version=2.0&key=PYM7IXA0P1M728I&cmd=getbikestations", Response.class);
+        Response response = restTemplate.getForObject("http://data.keolis-rennes.com/json/?version=2.0&key=KEY_API&cmd=getbikestations", Response.class);
 
         StringBuilder metricsBuilder = new StringBuilder();
         for (Station station : response.getOpendata().getAnswer().getData().getStations()) {
@@ -84,6 +84,28 @@ public class MetricsResource {
     }
 
 }
+----
+
+Un appel à l'URL correspondante fournit la réponse suivante :
+
+[source]
+----
+bikes_available{station="ZAC SAINT SULPICE"} 18
+slots_available{station="ZAC SAINT SULPICE"} 11
+bikes_available{station="VILLEJEAN-UNIVERSITE"} 13
+slots_available{station="VILLEJEAN-UNIVERSITE"} 13
+bikes_available{station="TURMEL"} 13
+slots_available{station="TURMEL"} 3
+bikes_available{station="TNB"} 1
+slots_available{station="TNB"} 27
+bikes_available{station="SAINTE THERESE"} 11
+slots_available{station="SAINTE THERESE"} 1
+bikes_available{station="SAINTE-ANNE"} 12
+slots_available{station="SAINTE-ANNE"} 12
+bikes_available{station="SAINT GEORGES"} 9
+slots_available{station="SAINT GEORGES"} 9
+bikes_available{station="ROTONDE"} 14
+...
 ----
 
 2 - Configuration Prometheus

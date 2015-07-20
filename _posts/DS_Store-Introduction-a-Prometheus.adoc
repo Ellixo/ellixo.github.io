@@ -147,6 +147,52 @@ Afin de simplifier l'opération, on peut bien sûr utiliser Docker (image *prom/
 
 Prometheus est dès lors disponible localement sur port 9090.
 
-image::prometheus/Prometheus[]
+image::prometheus/Prometheus.png[]
+
+Sur la page d'accueil, on retrouve notamment la configuration fournie et surtout le endpoint metrics fourni via Spring Boot - on peut voir notamment si ce dernier est acessible (State "Healthy") et le temps passé depuis le dernier *scraping* (ie. récupération de métriques).
+
+Afin de tester la validité des sources monitorés, il est possible de les visualiser via la console ou le moteur de graphe de Prometheus (menu Graph) :
+
+- Affichage de l'ensemble des vélos disponibles à Rennes dans un tableau (mode console) - requête Prometheus : *bikes_available*
+
+image::prometheus/Prometheus-Graph1.png[]
+
+- Affichage de l'évolution des vélos disponibles à la station St-Anne (mode graph) - requête Prometheus : *bikes_available{station="SAINTE-ANNE"}*
+
+image::prometheus/Prometheus-Graph2.png[]
 
 4 - Dashboard PromDash
+
+Comme nous vous l'avons déjà dit, Prometheus fournit son propre moteur de DashBoard : PromDash. Il permet de fournir, à partir des métriques Prometheus, différents types de graphiques paramétrables selon vos besoins.
+
+Pour lancer le client PromDash, on passe une nouvelle fois via Docker (image *prom/promdash*) :
+
+[source,bash]
+----
+~$ docker run -v /tmp/prom:/tmp/prom -e DATABASE_URL=sqlite3:/tmp/prom/file.sqlite3 prom/promdash ./bin/rake db:migrate
+~$ docker run -p 3000:3000 -v /tmp/prom:/tmp/prom -e DATABASE_URL=sqlite3:/tmp/prom/file.sqlite3 prom/promdash
+----
+
+Remarque : la première commande permet d'initialiser localement la base de données de PromDash.
+
+Encore une fois, la configuration de PromDash est très simple :
+
+- Référencement du serveur Prometheus :
+
+image::prometheus/PromDash-Server.png[]
+
+- Création d'un nouveau Dashboard au sein d'un Directory :
+
+image::prometheus/PromDash-Dashboard.png[]
+
+- Une fois le Dashboard créée, il est alors possible de créer autant de graphiques que l'on désire - par exemple, un graphique affichant les vélos et slots disponibles à la station St-Anne :
+
+image::prometheus/PromDash-Graph.png[]
+
+- Il est alors possible de monitorer cette station depuis une URL dédiée :
+
+image::prometheus/PromDash-Monitoring.png[]
+
+Prometheus
+==========
+

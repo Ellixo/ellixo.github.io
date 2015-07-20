@@ -4,7 +4,7 @@
 Prometheus
 ==========
 
-Prometheus est un des derniers nés dans le domaine du monitoring (développé chez SoundCloud majoritairement en Go) - il vient ainsi marcher sur les plate-bandes de solutions comme Graphite mais avec une approche globale.
+http://prometheus.io/[Prometheus] est un des derniers nés dans le domaine du monitoring (développé chez SoundCloud majoritairement en Go) - il vient ainsi marcher sur les plate-bandes de solutions comme Graphite mais avec une approche globale.
 
 En effet, au-delà du stockage de métriques, Promotheus fournit :
 
@@ -193,6 +193,9 @@ image::prometheus/PromDash-Graph.png[]
 
 image::prometheus/PromDash-Monitoring.png[]
 
-Prometheus
-==========
+Comme vous avez pu le voir, il est extrêmement simple et rapide (quelques minutes) de mettre en oeuvre un système de monitoring via Prometheus. Il est bon de rappeler qu'il est impensable de partir en production sans monitoring ; Prometheus peut donc vous aider sur ce point dès aujourd'hui.
+
+====
+Les sources de cet article sont disponibles sur le https://github.com/Ellixo/prometheus-demo[Repository GitHub Ellixo]
+====
 

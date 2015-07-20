@@ -86,6 +86,8 @@ public class MetricsResource {
 }
 ----
 
+Remarque : par défaut, Prometheus lit les métriques d'un host donné via l'URL */metrics*. Il est bien sûr possible de surcharger la configuration pour utiliser une autre URL si vous ne pouvez/voulez pas fournir une URL */metrics*.
+
 Un appel à l'URL correspondante fournit la réponse suivante :
 
 [source]
@@ -110,6 +112,8 @@ bikes_available{station="ROTONDE"} 14
 
 2 - Configuration Prometheus
 
+Une fois la datasource disponible, il est nécessaire de configurer Prometheus afin de lui indiquer à minima l'URL de la source et le timing d'interrogation de cette dernière (*scrape_interval*) ; il suffit pour cela fournir un fichier au format YAML tel que celui-ci :
+
 [source,yaml]
 ----
 global:
@@ -132,5 +136,17 @@ scrape_configs:
 ----
 
 3 - Serveur Prometheus
+
+Une fois le fichier de configuration prêt et la datasource démarrée, il suffit de démarrer Prometheus afin de commencer le monitoring de notre application.
+Afin de simplifier l'opération, on peut bien sûr utiliser Docker (image *prom/prometheus*) :
+
+[source,bash]
+----
+~$ docker run -p 9090:9090 -v /localPath/promotheus/promotheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+----
+
+Prometheus est dès lors disponible localement sur port 9090.
+
+image::prometheus/Prometheus[]
 
 4 - Dashboard PromDash

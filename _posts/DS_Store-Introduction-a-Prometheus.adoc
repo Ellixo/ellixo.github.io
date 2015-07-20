@@ -35,6 +35,34 @@ Pour vous démontrer cela, nous nous appuierons sur l'Open Data du réseau de v�
 
 1 - Mise à disposition d'un Endpoint Prometheus
 
+Le format de données des métriques Prometheus est simple mais pour autant très souple (système de clé/valeur appelé label). Il est ainsi possible de modéliser différentes dimensions d'une même métrique via un ou plusieurs labels.
+
+Une métrique est modélisée par une ou plusieurs lignes ASCII contenant :
+- le nom de la métrique
+- les labels de la métrique
+- la valeur de la métrique
+
+Exemple : métrique fournissant le nombre de vélos disponibles à Rennes à l'heure actuelle
+
+[source,json]
+----
+bikes_available{station="SAINTE THERESE"} 11
+bikes_available{station="SAINTE-ANNE"} 12
+----
+
+Dans l'exemple précédent :
+
+* bikes_available correspond au nom de la métrique
+* station est un label fournissant le nom du dock vélo (il est bien sûr possible de fournir plusieurs labels)
+* 11/12 correspondent aux nombres de vélos disponibles dans les 2 stations spécifiées ici
+
+Aussi, afin de fournir en temps réel les données à Prometheus, il suffit de fournir une URL ayant pour contenu les données attendues dans ce format. Pour cela, nous utiliserons ici Spring Boot mais il est bien sûr possible d'utiliser votre langage favori.
+
+Le code suivant fournit 2 métriques via https://data.keolis-rennes.com/[l'API OpenData] du réseau de vélos de Rennes fourni par Keolis :
+
+- bikes_available - nombre de vélos disponibles à une station donnée (identifié par un label *station*)
+- slots_available - nombre d'emplacements de vélo disponibles à une station donnée (identifié par un label *station*)
+
 [source,java]
 ----
 @RestController
@@ -59,6 +87,27 @@ public class MetricsResource {
 ----
 
 2 - Configuration Prometheus
+
+[source,yaml]
+----
+global:
+  scrape_interval:     15s
+  evaluation_interval: 15s
+
+  labels:
+      monitor: 'rennes-bike-monitor'
+
+rule_files:
+
+scrape_configs:
+  - job_name: 'rennes-bike'
+
+    scrape_interval: 5s # intervalle de lecture de la source de données
+    scrape_timeout: 10s
+
+    target_groups:
+      - targets: ['192.168.1.17:8080'] # adresse de la source de données
+----
 
 3 - Serveur Prometheus
 

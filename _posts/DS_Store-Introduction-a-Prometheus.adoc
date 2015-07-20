@@ -1,5 +1,5 @@
 = Introduction à Prometheus
-
+:hp-tags: Prometheus, Monitoring, Spring Boot, Docker
 
 Prometheus est un des derniers nés dans le domaine du monitoring (développé chez SoundCloud majoritairement en Go) - il vient ainsi marcher sur les plate-bandes de solutions comme Graphite mais avec une approche globale.
 

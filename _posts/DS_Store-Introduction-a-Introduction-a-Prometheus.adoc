@@ -8,7 +8,7 @@ http://prometheus.io/[Prometheus] est un des derniers nés dans le domaine des s
 
 En effet, au-delà du stockage de métriques, Prometheus fournit de nombreuses fonctionnalités :
 
-* une collecte active des métriques (ie. Prometheus collecte les données des systèmes monitorés via des endpoints fournis par ces derniers - Prometheus fournit également un système de push pour les systèmes ne pouvant pas fournir de point d'entrée)
+* une collecte active des métriques (ie. Prometheus collecte les données des systèmes monitorés via des endpoints fournis par ces derniers - si besoin, Prometheus fournit également un système de push pour les systèmes ne pouvant pas fournir de point d'entrée)
 * un système d'alerting (email, slack, webhook ...)
 * un gestionnaire de dashboard dédié (PromDash)
 * un modèle de données clé/valeur (système de labels permettant une identification fine des métriques)
@@ -31,13 +31,14 @@ Mise en oeuvre
 
 Au-delà de nombreuses fonctionnalités offertes par Prometheus, l'un des principaux avantages de ce dernier est sa rapidité et sa facilité de mise en oeuvre.
 
-Pour vous montrer cela, nous nous appuierons sur l'Open Data du réseau de vélo de Rennes Métropole. Nous allons monitorer l'ensemble des stations de vélos rennais et visualiser en temps réel les emplacements et vélos disponibles pour chacune d'entre elles.
+Pour vous montrer cela, nous nous appuierons sur https://data.keolis-rennes.com/[l'Open Data du réseau de vélo de Rennes Métropole]. Nous allons monitorer l'ensemble des stations de vélos rennais et visualiser en temps réel les emplacements et vélos disponibles pour chacune d'entre elles.
 
 1. Mise à disposition d'un Endpoint Prometheus
 
 Le format de données des métriques Prometheus est simple et très souple (système de clé/valeur appelé label). Il est possible de modéliser différentes dimensions d'une même métrique via un ou plusieurs labels.
 
 Une métrique est modélisée par une ou plusieurs lignes en text/plain contenant :
+
 - le nom de la métrique
 - les labels de la métrique
 - la valeur de la métrique
@@ -52,16 +53,16 @@ bikes_available{station="SAINTE-ANNE"} 12
 
 Dans l'exemple précédent :
 
-* bikes_available correspond au nom de la métrique
-* station est un label fournissant le nom du dock vélo (il est possible de fournir autant de labels que nécessaire)
-* les valeurs 11 et 12 correspondent aux nombres de vélos disponibles dans les 2 stations désignées ici
+* *bikes_available* correspond au nom de la métrique
+* *station* est un label fournissant le nom du dock vélo (il est possible de fournir autant de labels que nécessaire)
+* les valeurs *11* et *12* correspondent aux nombres de vélos disponibles dans les 2 stations désignées ici
 
 Aussi, afin de fournir en temps réel les données à Prometheus, il suffit de fournir une URL avec pour contenu les données attendues dans ce format. Pour cela, nous utiliserons Spring Boot mais il est bien sûr possible d'utiliser votre langage/plateforme favori.
 
 Le code suivant fournit 2 métriques via https://data.keolis-rennes.com/[l'API OpenData] du réseau de vélos de Rennes fourni par Keolis :
 
-- bikes_available - nombre de vélos disponibles à une station donnée (identifié par un label *station*)
-- slots_available - nombre d'emplacements de vélo disponibles à une station donnée (identifié par un label *station*)
+- *bikes_available* - nombre de vélos disponibles à une station donnée (identifié par un label *station*)
+- *slots_available* - nombre d'emplacements de vélo disponibles à une station donnée (identifié par un label *station*)
 
 [source,java]
 ----

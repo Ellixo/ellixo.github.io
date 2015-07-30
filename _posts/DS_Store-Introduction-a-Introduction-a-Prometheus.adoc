@@ -1,5 +1,5 @@
 = Introduction à Prometheus
-:hp-tags: Prometheus, Monitoring, Spring Boot, Docker
+:hp-tags: Prometheus, Monitoring, Spring Boot, Docker, OpenData
 
 Prometheus
 ==========
@@ -152,7 +152,7 @@ image::prometheus/Prometheus.png[]
 
 Sur la page d'accueil, on retrouve notamment la configuration fournie et surtout le endpoint metrics fourni via Spring Boot - on peut voir notamment si ce dernier est acessible (State "Healthy") et le temps passé depuis le dernier *scraping* (ie. récupération de métriques).
 
-Afin de tester la validité des sources monitorés, il est possible de les visualiser via la console ou le moteur de graphe de Prometheus (menu Graph) :
+Afin de tester la validité des sources monitorées, il est possible de les visualiser via la console ou le moteur de graphe de Prometheus (menu Graph) :
 
 - Affichage de l'ensemble des vélos disponibles à Rennes dans un tableau (mode console) - requête Prometheus : *bikes_available*
 

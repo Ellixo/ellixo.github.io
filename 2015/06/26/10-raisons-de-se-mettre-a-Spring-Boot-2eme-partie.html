@@ -8,12 +8,14 @@
 
     <title>10 raisons de se mettre à Spring Boot (2ème partie)</title>
     <meta name="description" content="" />
+    <link rel="alternate" hreflang="fr" href="http://blog.ellixo.com/" />
     <link href="//fonts.googleapis.com/css?family=Noto+Sans:300,400,700" rel="stylesheet" type="text/css">
     <link href="//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic" rel="stylesheet" type="text/css">
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-    <link href="//blog.ellixo.com/themes/Saga/assets/css/style.css?v=1.0.0" rel="stylesheet" type="text/css">
-    <link href="//blog.ellixo.com/themes/Saga/assets/css/animate.min.css?v=1.0.0" rel="stylesheet" type="text/css">
-    <link href="//blog.ellixo.com/themes/Saga/favicon.ico" rel="shortcut icon">
+    <link href="//blog.ellixo.com/themes/Ellixo/assets/css/style.css?v=1.0.0" rel="stylesheet" type="text/css">
+    <link href="//blog.ellixo.com/themes/Ellixo/assets/css/animate.min.css?v=1.0.0" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/default.min.css">
+    <link href="//blog.ellixo.com/themes/Ellixo/favicon.ico" rel="shortcut icon">
     <link rel="canonical" href="http://blog.ellixo.com/2015/06/26/10-raisons-de-se-mettre-a-Spring-Boot-2eme-partie.html" />
     
     <meta property="og:site_name" content="Blog Ellixo" />
@@ -22,7 +24,7 @@
     <meta property="og:description" content="La première partie de cet article est disponible ici 6 - La sécurité pour les nuls La mise en oeuvre de mécanisme de sécurité est primordial ; pour autant, il s&amp;#8217;agit toujours d&amp;#8217;une étape fastidieuse que l&amp;..." />
     <meta property="og:url" content="http://blog.ellixo.com/2015/06/26/10-raisons-de-se-mettre-a-Spring-Boot-2eme-partie.html" />
     <meta property="article:published_time" content="2015-06-25T22:00:00.000Z" />
-    <meta property="article:modified_time" content="2015-08-17T20:25:35.537Z" />
+    <meta property="article:modified_time" content="2015-08-17T20:27:42.288Z" />
     <meta property="article:tag" content="Spring Boot" />
     <meta property="article:tag" content="MongoDB" />
     <meta property="article:tag" content="Cloud Foundry" />
@@ -47,7 +49,7 @@
     "headline": "10 raisons de se mettre à Spring Boot (2ème partie)",
     "url": "http://blog.ellixo.com/2015/06/26/10-raisons-de-se-mettre-a-Spring-Boot-2eme-partie.html",
     "datePublished": "2015-06-25T22:00:00.000Z",
-    "dateModified": "2015-08-17T20:25:35.537Z",
+    "dateModified": "2015-08-17T20:27:42.288Z",
     "keywords": "Spring Boot,  MongoDB,  Cloud Foundry",
     "description": "La première partie de cet article est disponible ici 6 - La sécurité pour les nuls La mise en oeuvre de mécanisme de sécurité est primordial ; pour autant, il s&amp;#8217;agit toujours d&amp;#8217;une étape fastidieuse que l&amp;..."
 }
@@ -61,7 +63,7 @@
     <header id="header" class="animated fadeIn">
     <div class="header-background">
     <section class="blog-content">
-        <a id="site-url" class="blog-title" href="http://blog.ellixo.com">Blog Ellixo</a>
+        <a href="http://blog.ellixo.com"><img src="/images/logo_w.png" class="logo"/></a>
         <span class="blog-description">Le Blog d&#x27;Ellixo</span>
         <nav class="links fadeIn animated">
             <ul>
@@ -399,6 +401,7 @@ OK</code></pre>
 
     
         <section class="post-comments">
+          <h3 id="reply-title" class="comment-reply-title">Laisser un commentaire</h3>
           <div id="disqus_thread"></div>
           <script type="text/javascript">
           var disqus_shortname = 'ellixo-blog'; // required: replace example with your forum shortname
@@ -418,12 +421,11 @@ OK</code></pre>
 </main>
     <footer class="animated fadeIn" id="footer">
         <section class="colophon">
-          <section class="copyright">Copyright &copy; <span itemprop="copyrightHolder">Blog Ellixo</span>. <span rel="license">All Rights Reserved</span>.</section>
-          <section class="poweredby">Published with <a class="icon-ghost" href="http://hubpress.io">HubPress</a></section>
+          <section class="copyright">Copyright &copy; <a href="http://www.ellixo.com">Ellixo</a> All Rights Reserved - Published with <a class="icon-ghost" href="http://hubpress.io">HubPress</a></section>
         </section>
         <section class="bottom">
           <section class="attribution">
-            <a href="http://github.com/Reedyn/Saga">Built with <i class="fa fa-heart"></i> and Free and Open-Source Software</a>.
+            <a href="http://www.ellixo.com">Accueil Ellixo</a> - <a href="http://www.ellixo.com/mentions-blog.html">Mentions Légales</a>
           </section>
         </section>
     </footer>
@@ -439,7 +441,7 @@ OK</code></pre>
 
         hljs.initHighlightingOnLoad();      
       </script>
-    <script src="//blog.ellixo.com/themes/Saga/assets/js/scripts.js?v=1.0.0"></script>
+    <script src="//blog.ellixo.com/themes/Ellixo/assets/js/scripts.js?v=1.0.0"></script>
     
     <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -451,5 +453,7 @@ OK</code></pre>
     ga('send', 'pageview');
 
     </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 </body>
 </html>

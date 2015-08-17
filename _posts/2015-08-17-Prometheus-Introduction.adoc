@@ -1,0 +1,202 @@
+= Prometheus - Introduction
+:hp-tags: Prometheus, Monitoring, Spring Boot, Docker, OpenData
+
+Prometheus
+==========
+
+http://prometheus.io/[Prometheus] est un des derniers nés dans le domaine des solutions de monitoring (développé chez SoundCloud majoritairement en Go) - il vient marcher sur les plate-bandes de solutions comme Graphite en apportant une approche relativement différente.
+
+En effet, au-delà du stockage de métriques, Prometheus fournit de nombreuses fonctionnalités :
+
+* une collecte active des métriques (ie. Prometheus collecte les données des systèmes monitorés via des endpoints fournis par ces derniers - si besoin, Prometheus fournit également un système de push pour les systèmes ne pouvant pas fournir de point d'entrée)
+* un système d'alerting (email, slack, webhook ...)
+* un gestionnaire de dashboard dédié (PromDash)
+* un modèle de données clé/valeur (système de labels permettant une identification fine des métriques)
+* un système simple de requêtage des métriques
+
+Pourquoi monitorer vos applications ?
+=====================================
+
+La réponse est multiple et sera forcément lié à votre environnement de production et votre environnement métier :
+
+* Evolution de stocks
+* Impact des actions marketing sur les demandes client
+* Usage CPU, RAM
+* Temps de réponse des requêtages DB
+* Serveur Up/Down
+* ...
+
+Mise en oeuvre
+==============
+
+Au-delà de nombreuses fonctionnalités offertes par Prometheus, l'un des principaux avantages de ce dernier est sa rapidité et sa facilité de mise en oeuvre.
+
+Pour vous montrer cela, nous nous appuierons sur https://data.keolis-rennes.com/[l'Open Data du réseau de vélo de Rennes Métropole]. Nous allons monitorer l'ensemble des stations de vélos rennais et visualiser en temps réel les emplacements et vélos disponibles pour chacune d'entre elles.
+
+1. Mise à disposition d'un Endpoint Prometheus
+
+Le format de données des métriques Prometheus est simple et très souple (système de clé/valeur appelé label). Il est possible de modéliser différentes dimensions d'une même métrique via un ou plusieurs labels.
+
+Une métrique est modélisée par une ou plusieurs lignes en text/plain contenant :
+
+- le nom de la métrique
+- les labels de la métrique
+- la valeur de la métrique
+
+Exemple : métrique fournissant le nombre de vélos disponibles à Rennes à l'instant donné
+
+[source,json]
+----
+bikes_available{station="SAINTE THERESE"} 11
+bikes_available{station="SAINTE-ANNE"} 12
+----
+
+Dans l'exemple précédent :
+
+* *bikes_available* correspond au nom de la métrique
+* *station* est un label fournissant le nom du dock vélo (il est possible de fournir autant de labels que nécessaire)
+* les valeurs *11* et *12* correspondent aux nombres de vélos disponibles dans les 2 stations désignées ici
+
+Aussi, afin de fournir en temps réel les données à Prometheus, il suffit de fournir une URL avec pour contenu les données attendues dans ce format. Pour cela, nous utiliserons Spring Boot mais il est bien sûr possible d'utiliser votre langage/plateforme favori.
+
+Le code suivant fournit 2 métriques via https://data.keolis-rennes.com/[l'API OpenData] du réseau de vélos de Rennes fourni par Keolis :
+
+- *bikes_available* - nombre de vélos disponibles à une station donnée (identifié par un label *station*)
+- *slots_available* - nombre d'emplacements de vélo disponibles à une station donnée (identifié par un label *station*)
+
+[source,java]
+----
+@RestController
+@RequestMapping("/metrics")
+public class MetricsResource {
+
+    @RequestMapping(method = RequestMethod.GET, produces={"text/plain"})
+    public ResponseEntity<String> get() {
+        RestTemplate restTemplate = new RestTemplate();
+        Response response = restTemplate.getForObject("http://data.keolis-rennes.com/json/?version=2.0&key=KEY_API&cmd=getbikestations", Response.class);
+
+        StringBuilder metricsBuilder = new StringBuilder();
+        for (Station station : response.getOpendata().getAnswer().getData().getStations()) {
+            metricsBuilder.append("bikes_available{station=\"" + station.getName() + "\"} " + station.getBikesavailable() +"\n");
+            metricsBuilder.append("slots_available{station=\"" + station.getName() + "\"} " + station.getSlotsavailable() +"\n");
+        }
+
+        return new ResponseEntity<>(metricsBuilder.toString(), HttpStatus.OK);
+    }
+
+}
+----
+
+Remarque : par défaut, Prometheus lit les métriques d'un host donné via l'URL */metrics*. Il est bien sûr possible de modifier la configuration pour utiliser une autre URL si vous ne pouvez/voulez pas fournir une URL */metrics*.
+
+Un appel à l'URL fournit la réponse suivante :
+
+[source]
+----
+bikes_available{station="ZAC SAINT SULPICE"} 18
+slots_available{station="ZAC SAINT SULPICE"} 11
+bikes_available{station="VILLEJEAN-UNIVERSITE"} 13
+slots_available{station="VILLEJEAN-UNIVERSITE"} 13
+bikes_available{station="TURMEL"} 13
+slots_available{station="TURMEL"} 3
+bikes_available{station="TNB"} 1
+slots_available{station="TNB"} 27
+bikes_available{station="SAINTE THERESE"} 11
+slots_available{station="SAINTE THERESE"} 1
+bikes_available{station="SAINTE-ANNE"} 12
+slots_available{station="SAINTE-ANNE"} 12
+bikes_available{station="SAINT GEORGES"} 9
+slots_available{station="SAINT GEORGES"} 9
+bikes_available{station="ROTONDE"} 14
+...
+----
+
+2 - Configuration Prometheus
+
+Une fois la datasource disponible, il est nécessaire de configurer Prometheus afin de lui indiquer à minima l'URL de la source et le timing d'interrogation de cette dernière (*scrape_interval*) ; il suffit pour cela fournir un fichier au format YAML tel que celui-ci :
+
+[source,yaml]
+----
+global:
+  scrape_interval:     15s
+  evaluation_interval: 15s
+
+  labels:
+      monitor: 'rennes-bike-monitor'
+
+rule_files:
+
+scrape_configs:
+  - job_name: 'rennes-bike'
+
+    scrape_interval: 5s # intervalle de lecture de la source de données
+    scrape_timeout: 10s
+
+    target_groups:
+      - targets: ['192.168.1.17:8080'] # adresse de la source de données
+----
+
+3 - Serveur Prometheus
+
+Une fois le fichier de configuration prêt et la datasource démarrée, il suffit de démarrer Prometheus afin de commencer le monitoring de notre application.
+Afin de simplifier l'opération, on peut bien sûr utiliser Docker (image *prom/prometheus*) :
+
+[source,bash]
+----
+~$ docker run -p 9090:9090 -v /localPath/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml prom/prometheus
+----
+
+Prometheus est alors disponible localement sur le port 9090.
+
+image::prometheus/Prometheus.png[]
+
+Sur la page d'accueil, on retrouve notamment la configuration fournie et surtout le endpoint metrics fourni via Spring Boot - on peut voir notamment si ce dernier est acessible (State "Healthy") et le temps passé depuis le dernier *scraping* (ie. récupération de métriques).
+
+Afin de tester la validité des sources monitorées, il est possible de les visualiser via la console ou le moteur de graphe de Prometheus (menu Graph) :
+
+- Affichage de l'ensemble des vélos disponibles à Rennes dans un tableau (mode console) - requête Prometheus : *bikes_available*
+
+image::prometheus/Prometheus-Graph1.png[]
+
+- Affichage de l'évolution des vélos disponibles à la station St-Anne (mode graph) - requête Prometheus : *bikes_available{station="SAINTE-ANNE"}*
+
+image::prometheus/Prometheus-Graph2.png[]
+
+4 - Dashboard PromDash
+
+Comme nous l'avons déjà dit, Prometheus fournit son propre moteur de DashBoard : PromDash. Il permet de fournir, à partir de métriques Prometheus, différents types de graphiques paramétrables selon les besoins.
+
+Pour lancer le client PromDash, on passe une nouvelle fois par Docker (image *prom/promdash*) :
+
+[source,bash]
+----
+~$ docker run -v /tmp/prom:/tmp/prom -e DATABASE_URL=sqlite3:/tmp/prom/file.sqlite3 prom/promdash ./bin/rake db:migrate
+~$ docker run -p 3000:3000 -v /tmp/prom:/tmp/prom -e DATABASE_URL=sqlite3:/tmp/prom/file.sqlite3 prom/promdash
+----
+
+Remarque : la première commande permet d'initialiser localement la base de données de PromDash.
+
+Encore une fois, la configuration de PromDash est très simple :
+
+- Référencement du serveur Prometheus :
+
+image::prometheus/PromDash-Server.png[]
+
+- Création d'un nouveau Dashboard au sein d'un Directory PromDash :
+
+image::prometheus/PromDash-Dashboard.png[]
+
+- Une fois le Dashboard créée, il est alors possible de créer autant de graphiques que l'on désire - par exemple, un graphique affichant les vélos et slots disponibles à la station St-Anne :
+
+image::prometheus/PromDash-Graph.png[]
+
+- Il est alors possible de monitorer cette station depuis une URL dédiée :
+
+image::prometheus/PromDash-Monitoring.png[]
+
+Comme vous avez pu le voir, il est extrêmement simple et rapide (quelques minutes) de mettre en oeuvre un système de monitoring via Prometheus. Il est bon de rappeler qu'il est impensable de partir en production sans monitoring ; Prometheus peut donc vous aider sur ce point dès aujourd'hui.
+
+====
+Les sources de cet article sont disponibles sur le https://github.com/Ellixo/prometheus-demo[Repository GitHub Ellixo]
+====
+

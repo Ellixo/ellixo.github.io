@@ -4,18 +4,18 @@
 JXLS
 ====
 
-Quand on parle Excel dans le monde Java, on pense tout de suite à l'acteur historique https://poi.apache.org/[Apache POI]. POI permet depuis depuis de nombreuses années de manipuler les formats Microsoft Office au sein de l'écosystème Java. Le gros avantage de POI quand on veut manipuler le format XLS par exemple est son extrême richesse ; pour autant, cette richesse en terme d'API se fait au détriment la clarté du code : ceux qui ont déjà créé from scratch un fichier Excel via POI savent que le code nécessaire à la génération de ce dernier est extrêmement verbeux.
+Quand on parle Excel dans le monde Java, on pense tout de suite à l'acteur historique https://poi.apache.org/[Apache POI]. POI permet depuis de nombreuses années de manipuler les formats Microsoft Office au sein de l'écosystème Java. Le gros avantage de POI quand on veut manipuler le format XLS par exemple est son extrême richesse ; pour autant, cette richesse en terme d'API se fait au détriment de la clarté du code : ceux qui ont déjà créé from scratch un fichier Excel via POI savent que le code nécessaire à la génération de ce dernier est extrêmement verbeux et souvent difficilement maintenable.
 
-C'est là que http://jxls.sourceforge.net/index.html[JXLS] vient à la rescousse. En effet, JXLS n'a pas pour objectif de founir une nouvelle API Java MS Office (au contraire même puisqu'il utilise POI en interne) mais de fournir un outil qui va simplifier la création de rapport Excel en partant de fichiers templates, en se concentrant uniquement sur les données et le remplissage du fichier à l'aide de plusieurs raccourcis syntaxiques extrêmement puissants.
+C'est là que http://jxls.sourceforge.net/index.html[JXLS] vient à notre rescousse. En effet, JXLS n'a pas pour objectif de founir une nouvelle API Java MS Office (au contraire même, puisqu'il utilise POI en interne) mais de fournir un outil qui va simplifier la création de rapport Excel en se concentrant uniquement sur les données et le remplissage d'un fichier template standard à l'aide de raccourcis syntaxiques extrêmement puissants.
 
 D'abord, le jeu de données
 ==========================
 
-Pour remplir notre premier fichier via JXLS, nous utiliserons un jeu de données publiques fournis par le site data.gouv.fr[data.gouv.fr] : la base publique de médicaments. Cette https://www.data.gouv.fr/fr/datasets/base-de-donnees-publique-des-medicaments-base-officielle/[base de données] permet au grand public et aux professionnels de santé d'accéder à des données et documents de référence sur les médicaments commercialisés ou ayant été commercialisés durant les deux dernières années en France. Et là où cette base se prête bien à l'exercice de reporting Excel, c'est qu'elle est actuellement fournie au format CSV et donc peu lisible et non exploitable en l'état.
+Pour remplir notre premier fichier via JXLS, nous utiliserons un jeu de données publiques fournis par le site data.gouv.fr[data.gouv.fr] : la base publique de médicaments. Cette https://www.data.gouv.fr/fr/datasets/base-de-donnees-publique-des-medicaments-base-officielle/[base de données] permet au grand public et aux professionnels de santé d'accéder à des données et documents de référence sur les médicaments commercialisés ou ayant été commercialisés durant les deux dernières années en France. Et là où cette base se prête bien à l'exercice de reporting Excel, c'est qu'elle est actuellement fournie au format CSV et donc peu lisible et difficilement exploitable en l'état.
 
-Dans le cadre de ce post, nous nous concentrerons sur le fichier principal de cette base contenant l'ensemble des médicaments et leurs informations principales (nom, voies d'administration, laboratoire ...) : le fichier *CIS_bdpm.txt* (mise à jour du 04/09/2015 utilisée dans notre rapport).
+Dans le cadre de notre exemple, nous nous concentrerons sur le fichier principal de cette base contenant l'ensemble des médicaments et leurs informations principales (nom, voies d'administration, laboratoire ...) : le fichier *CIS_bdpm.txt* (mise à jour du 04/09/2015 utilisée ici).
 
-La première étape va être de transformer chaque ligne du fichier CSV en un objet Java. Pour cela, nous utiliserons la librairie *Jackson CSV* car oui, Jackson sait aussi faire ça (en plus de JSON bien sûr).
+La première étape est de transformer chaque ligne du fichier CSV en un objet Java. Pour cela, nous utiliserons la librairie *Jackson CSV* car oui, Jackson sait aussi faire ça (en plus de JSON bien sûr).
 
 Tout d'abord, définissons un objet *Medicament* qui portera les données CSV.
 
@@ -40,7 +40,7 @@ public class Medicament {
     ...
 ----
 
-Maintenant, il ne nous reste plus qu'à lire le fichier CSV et à indiquer à Jackson les informations de mapping pour récupérer la liste complète des médicaments :
+Il ne nous reste plus qu'à lire le fichier CSV et à indiquer à Jackson les informations de mapping pour récupérer la liste complète des médicaments :
 
 [source,java]
 ----
@@ -55,20 +55,20 @@ List<Medicament> medicaments = it.readAll();
 Template Excel
 ==============
 
-Maintenant que nous avons notre jeu de données, nous pouvons maintenant définir notre template Excel. Partons tout simplement d'un fichier Excel classique (à quelques détails prês) :
+Maintenant que nous avons notre jeu de données, nous pouvons maintenant définir notre template Excel. Nous partons simplement d'un fichier Excel "classique" (à quelques détails prês) :
 
 image::jxls/template1.png[]
 
 En effet, vous pouvez voir que les cellules censées contenir les données de chaque médicament utilise la syntaxe suivante *${variable.propriete}*. Cette syntaxe est connue de JXLS bien sûr et sera utilisée ultérieurement pour remplir le document avec les données finales (vous trouverez le template https://github.com/Ellixo/JXLS-demo/blob/master/src/main/resources/BDM.xls?raw=true[ici]).
 
-Afin de finaliser notre template, nous allons l'enrichir utilisant un des mécanismes fournis par JXLS pour simplifier la gestion des données : le système de markup. Pour ce faire, Nous allons insérer des metadatas JXLS au sein du template via les commentaires natifs Excel (remarque : les markups JXLS utilise la syntaxe Apache JEXL).
+Afin de finaliser notre template, nous allons l'enrichir en utilisant un des mécanismes fournis par JXLS pour simplifier la gestion des données : le système de markup. Pour ce faire, Nous allons insérer des metadatas JXLS au sein du template via les commentaires natifs Excel (remarque : les markups JXLS utilise la syntaxe Apache JEXL).
 
-Pour notre besoin, nous n'avons besoin que de définir 2 markups :
+Pour notre besoin, nous n'aurons besoin que de définir 2 markups :
 
 image::jxls/template2.png[]
 
 - le premier (*jx:area(lastCell="L2")*) défini la zone d'action de JXLS au sein du template (ici de la cellule A1 à la cellule L2). C'est une étape indispensable afin de permettre à JXLS de manipuler le fichier ; en effet, l'application de Command JXLS (ie. transformation et écriture au sein du fichier) ne peut se faire qu'au sein d'une Area. Il est bien sûr possible de définir plusieurs Areas ou même d'imbriquer des Areas au sein d'un même fichier mais dans notre cas, ça ne sera pas nécessaire.
-- le deuxième et dernier commentaire (*jx:each(items="medicaments" var="medicament" lastCell="L2")*) indique à JXLS que nous désirons itérer sur la variable medicaments (ie. liste des médicaments), chaque élément de cette liste est associé à la variable medicament et le mapping de cette dernière avec le template s'applique jusqu'à la cellule L2.
+- le deuxième et dernier commentaire (*jx:each(items="medicaments" var="medicament" lastCell="L2")*) indique à JXLS que nous désirons itérer sur la variable *medicaments* (ie. liste des médicaments), chaque élément de cette liste est associé à la variable *medicament* et le mapping de cette dernière avec le template s'applique jusqu'à la cellule L2.
 
 Voilà, notre template est prêt.
 
@@ -109,7 +109,7 @@ On peut alors lancer la génération du rapport et là normalement...ça ne marc
 java.lang.ClassCastException: java.util.ArrayList cannot be cast to java.lang.String
 ----
 
-Le problème vient de notre objet *Medicament*. Ce dernier fournit 2 propriétés (voiesAdministration et titulaires) qui ne sont pas des types simples et qui ne sont gérés par JXLS.
+Le problème vient de notre objet *Medicament*. Ce dernier fournit 2 propriétés (*voiesAdministration* et *titulaires*) qui ne sont pas des types simples et donc non gérés par JXLS.
 
 Pour ce genre de cas, il possible de fournir des fonctions *custom* qui vont transformer nos propriétés au bon format. Pour ce faire, nous allons tout d'abord définir une classe transformant notre liste d'objets en chaîne :
 
@@ -131,28 +131,30 @@ public static class ListUtil {
 }
 ----
 
-Avant d'utiliser cette fonction dans notre template, il est nécessaire de la référencer au sein du *Transformer* JXSL :
+Puis pour utiliser cette fonction dans notre template, il est nécessaire de la référencer au sein du *Transformer* JXSL :
 
 [source,bash]
 ----
+...
 JexlExpressionEvaluator evaluator = (JexlExpressionEvaluator) transformer.getTransformationConfig().getExpressionEvaluator();
 Map<String, Object> functionMap = new HashMap<>();
 functionMap.put("joiner", new ListUtil());
 evaluator.getJexlEngine().setFunctions(functionMap);
+...
 ----
 
-Pour utiliser notre fonction, il nous suffit alors de modifier par exemple pour la liste des titulaires, le contenu de la cellule correspondante de *${medicament.titulaires}* à *${joiner:join(medicament.titulaires)}.*
+Pour utiliser notre fonction, il nous suffit alors de modifier, par exemple pour la liste des titulaires, le contenu de la cellule correspondante de *${medicament.titulaires}* à *${joiner:join(medicament.titulaires)}.*
 
 image::jxls/template3.png[]
 
-Et si nous relançons la génération du rapport, cette fois-ci, ça passe sans problème :
+Et si nous relançons la génération du rapport, cette fois-ci, cela passe sans problème :
 
 image::jxls/result.png[]
 
 Conclusion
 ==========
 
-La génération de rapport Excel est un besoin très courant et souvent stratégique pour les utilisateurs finaux, pourtant, honnêtement, il s'agit rarement du sujet le plus passionnant au sein d'un projet pour les développeurs. C'est en cela que JXLS est vraiment intéressant ; par sa simplicité et sa rapidité de mise en oeuvre, cette librairie vous fera gagner énormément de temps pour la mise en oeuvre de votre moteur de reporting Excel.
+La génération de rapport Excel est un besoin très courant et souvent stratégique pour les utilisateurs finaux, pourtant, il s'agit rarement du sujet le plus passionnant au sein d'un projet pour les développeurs. C'est en cela que JXLS est vraiment intéressant ; par sa simplicité et sa rapidité de mise en oeuvre, cette librairie vous fera gagner énormément de temps pour la mise en oeuvre de votre moteur de reporting Excel.
 
 ====
 Les sources de cet article sont disponibles sur le https://github.com/Ellixo/JXLS-demo[Repository GitHub Ellixo] - pour information, le fichier CIS_bdpm.txt n'est pas fourni dans le repository afin de ne pas stocker de données obsolètes : vous pourrez récupérer le fichier sur le https://www.data.gouv.fr/fr/datasets/base-de-donnees-publique-des-medicaments-base-officielle/[site dédié].

@@ -1,5 +1,5 @@
 = JXLS - Reporting Excel
-:hp-tags: JXLS, Reporting, CSV, OpenData
+:hp-tags: JXLS, Reporting, Jackson, CSV, OpenData
 
 JXLS
 ==========
@@ -8,5 +8,11 @@ Quand on parle Excel dans le monde Java, on pense tout de suite à l'acteur hist
 
 C'est là que JXLS vient à la rescousse. En effet, JXLS n'a pas pour objectif de founir une nouvelle API Java MS Office (au contraire même puisqu'il utilise POI en interne) mais de fournir un outil qui va simplifier la création de rapport Excel en partant de fichiers templates, en se concentrant uniquement sur les données et le remplissage du fichier à l'aide de plusieurs raccourcis syntaxiques extrêmement concis.
 
-D'abord le jeu de données
-=========================
+D'abord, le jeu de données
+==========================
+
+Pour remplir notre premier fichier via JXLS, nous utiliserons un jeu de données publiques fournis par le site date.gouv.fr : la base publique de médicaments. Cette base permet au grand public et aux professionnels de santé d'accéder à des données et documents de référence sur les médicaments commercialisés ou ayant été commercialisés durant les deux dernières années en France. Et là où cette base se prête bien à l'exercice de reporting Excel, c'est qu'elle est actuellement fournie au format CSV et donc peu lisible et non exploitable en l'état.
+
+Dans le cadre de ce post, nous nous concentrerons sur le fichier principal de cette base contenant l'ensemble des médicaments et leurs informations principales (nom, voies d'administration, laboratoire ...) : le fichier CIS_bdpm.txt.
+
+La première étape va être de transformer chaque ligne du fichier CSV en un objet Java. Pour cela, nous utiliserons la librairie Jackson CSV car oui, Jackson sait aussi faire ça (en plus de JSON bien sûr).

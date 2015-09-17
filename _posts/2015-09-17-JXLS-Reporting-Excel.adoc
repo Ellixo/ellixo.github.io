@@ -57,8 +57,93 @@ Template Excel
 
 Maintenant que nous avons notre jeu de données, nous pouvons maintenant définir notre template Excel. Et là, nous partons tout simplement d'un fichier Excel classique :
 
+Vous pouvez voir que les cellules censées contenir les données de chaque médicament utilise la syntaxe suivante ${variable.propriete}. Cette syntaxe est connue de JXLS bien sûr et sera utilisée pour remplir le document avec les données finales.
+
 C'est maintenant que je JXLS entre en scène ; dans un premier temps, nous allons enrichir notre template en utilisant un des mécanismes fournis par JXLS pour simplifier la gestion des données : le système de markup. 
 
 Nous allons tout simplement insérer des metadatas JXLS au sein du template via les commentaires (remarque : les markups JXLS utilise la syntaxe Apache JEXL).
 
+Pour notre besoin, nous n'avons besoin que de définir 2 markups :
 
+- le premier (jx:area(lastCell="L2") défini la zone d'action de JXLS au sein du template (ici de la cellule A1 à la cellule L2). C'est une étape indispensable afin de permettre à JXLS de manipuler le fichier ; en effet, l'application de Command JXLS (ie. transformation et écriture au sein du fichier) ne peut se faire qu'au sein d'une Area. Il est bien sûr possible de définir plusieurs Areas ou même d'imbriquer des Areas au sein d'un même fichier mais dans notre cas, ça ne sera pas nécessaire.
+- le deuxième et dernier commentaire (jx:each(items="medicaments" var="medicament" lastCell="L2")) indique à JXLS que nous désirons itérer sur la variable medicaments (ie. liste des médicaments), chaque élément de cette liste est associé à la variable medicament et le mapping de cette dernière avec le template s'applique jusqu'à la cellule L2.
+
+Voilà, notre template est prêt.
+
+Génération du rapport
+=====================
+
+Il ne nous reste plus qu'à générer le rapport final en faisant le lien entre données et template via l'API JXLS :
+
+[source,java]
+----
+AreaBuilder areaBuilder = new XlsCommentAreaBuilder(); // activation de la gestion JXLS des commentaires Excel
+
+try (InputStream is = JXLS.class.getClassLoader().getResourceAsStream("./BDM.xls")) {
+    try (OutputStream os = new FileOutputStream("./BDM_result.xls")) {
+        Context context = new Context();
+        context.putVar("medicaments", medicaments);
+
+        Transformer transformer = TransformerFactory.createTransformer(is, os);
+
+        areaBuilder.setTransformer(transformer);
+        List xlsAreaList = areaBuilder.build();
+        Iterator iterator = xlsAreaList.iterator();
+
+        while (iterator.hasNext()) {
+            Area xlsArea = (Area) iterator.next();
+            xlsArea.applyAt(new CellRef(xlsArea.getStartCellRef().getCellName()), context);
+        }
+
+        transformer.write();
+    }
+}
+----
+
+On peut alors lancer la génération du rapport et là normalement...ça ne marche pas ! En effet, il nous reste un dernier point à gérer : l'exécution de la génération du rapport devrait vous donner en l'état l'exception suivante :
+
+[source,bash]
+----
+java.lang.ClassCastException: java.util.ArrayList cannot be cast to java.lang.String
+----
+
+Le problème vient de notre objet Medicament. Ce dernier fournit 2 propriétés (voiesAdministration et titulaires) qui ne sont pas des types simples et qui ne sont mappables directement par JXLS.
+
+Pour ce genre de cas, il possible de fournir des fonctions custom qui vont transformer nos propriétés au bon format. Pour ce faire, nous allons tout d'abord définir une classe transformant notre liste d'objets en chaîne :
+
+[source,bash]
+----
+public static class ListUtil {
+
+    public String join(List list) {
+        StringBuilder builder = new StringBuilder();
+        for (Object o : list) {
+            if (builder.length() != 0) {
+                builder.append(" / ");
+            }
+            builder.append(o);
+        }
+        return builder.toString();
+    }
+
+}
+----
+
+Avant d'utiliser cette fonction dans notre template, il est nécessaire de la référencer au sein du Transformer JXSL :
+
+[source,bash]
+----
+JexlExpressionEvaluator evaluator = (JexlExpressionEvaluator) transformer.getTransformationConfig().getExpressionEvaluator();
+Map<String, Object> functionMap = new HashMap<>();
+functionMap.put("joiner", new ListUtil());
+evaluator.getJexlEngine().setFunctions(functionMap);
+----
+
+Pour utiliser notre fonction, il nous suffit alors de modifier par exemple pour la liste des titulaires, le contenu de la cellule correspondante de ${medicament.titulaires} à ${joiner:join(medicament.titulaires)}.
+
+Et si nous relançons la génération du rapport, cette fois-ci, ça passe sans problème :
+
+Conclusion
+==========
+
+La génération de rapport Excel est un besoin très courant et souvent stratégique pour les utilisateurs finaux, pourtant, honnêtement, il s'agit rarement du sujet le plus passionnant au sein d'un projet pour les développeurs. C'est en cela que JXLS est vraiment intéressant ; par sa simplicité et sa rapidité de mise en oeuvre, cette librairie vous fera gagner énormément de temps pour la mise en oeuvre de votre moteur de reporting Excel.

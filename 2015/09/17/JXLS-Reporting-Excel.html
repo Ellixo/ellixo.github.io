@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>JXLS - Reporting Excel</title>
+    <meta name="description" content="" />
+    <link rel="alternate" hreflang="fr" href="http://blog.ellixo.com/" />
+    <link href="//fonts.googleapis.com/css?family=Noto+Sans:300,400,700" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic" rel="stylesheet" type="text/css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="//blog.ellixo.com/themes/Ellixo/assets/css/style.css?v=1.0.0" rel="stylesheet" type="text/css">
+    <link href="//blog.ellixo.com/themes/Ellixo/assets/css/animate.min.css?v=1.0.0" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/styles/default.min.css">
+    <link href="//blog.ellixo.com/themes/Ellixo/favicon.ico" rel="shortcut icon">
+    <link rel="canonical" href="http://blog.ellixo.com/2015/09/17/JXLS-Reporting-Excel.html" />
+    
+    <meta property="og:site_name" content="Blog Ellixo" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="JXLS - Reporting Excel" />
+    <meta property="og:description" content="JXLS Quand on parle Excel dans le monde Java, on pense tout de suite à l&amp;#8217;acteur historique Apache POI. POI permet depuis de nombreuses années de manipuler les formats Microsoft Office au sein de l&#x27;écosystème Java. Le gros..." />
+    <meta property="og:url" content="http://blog.ellixo.com/2015/09/17/JXLS-Reporting-Excel.html" />
+    <meta property="article:published_time" content="2015-09-16T22:00:00.000Z" />
+    <meta property="article:modified_time" content="2015-09-17T23:08:34.232Z" />
+    <meta property="article:tag" content="JXLS" />
+    <meta property="article:tag" content="Reporting" />
+    <meta property="article:tag" content="Jackson" />
+    <meta property="article:tag" content="CSV" />
+    <meta property="article:tag" content="OpenData" />
+    
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="JXLS - Reporting Excel" />
+    <meta name="twitter:description" content="JXLS Quand on parle Excel dans le monde Java, on pense tout de suite à l&amp;#8217;acteur historique Apache POI. POI permet depuis de nombreuses années de manipuler les formats Microsoft Office au sein de l&#x27;écosystème Java. Le gros..." />
+    <meta name="twitter:url" content="http://blog.ellixo.com/2015/09/17/JXLS-Reporting-Excel.html" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "Blog Ellixo",
+    "author": {
+        "@type": "Person",
+        "name": "Grégory Le Bonniec",
+        "image": "https://avatars.githubusercontent.com/u/9615799?v=3",
+        "url": "undefined/author/undefined",
+        "sameAs": null
+    },
+    "headline": "JXLS - Reporting Excel",
+    "url": "http://blog.ellixo.com/2015/09/17/JXLS-Reporting-Excel.html",
+    "datePublished": "2015-09-16T22:00:00.000Z",
+    "dateModified": "2015-09-17T23:08:34.232Z",
+    "keywords": "JXLS,  Reporting,  Jackson,  CSV,  OpenData",
+    "description": "JXLS Quand on parle Excel dans le monde Java, on pense tout de suite à l&amp;#8217;acteur historique Apache POI. POI permet depuis de nombreuses années de manipuler les formats Microsoft Office au sein de l&#x27;écosystème Java. Le gros..."
+}
+    </script>
+
+    <meta name="generator" content="Ghost ?" />
+    <link rel="alternate" type="application/rss+xml" title="Blog Ellixo" href="http://blog.ellixo.com/rss" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/styles/default.min.css">
+</head>
+<body class="post-template tag-JXLS tag-Reporting tag-Jackson tag-CSV tag-OpenData">
+    <header id="header" class="animated fadeIn">
+    <div class="header-background">
+    <section class="blog-content">
+        <a href="http://blog.ellixo.com"><img src="/images/logo_w.png" class="logo"/></a>
+        <span class="blog-description">Le Blog d&#x27;Ellixo</span>
+        <nav class="links fadeIn animated">
+            <ul>
+                <!-- <li class="rss"><a title="RSS Feed" href="/rss/"><i class="fa fa-fw fa-rss-square"></i></a></li> -->
+        
+            </ul>
+        </nav>
+    </section>
+    <section class="header-content">
+        <h1 class="post-title animated fadeInUp">JXLS - Reporting Excel</h1>
+        <span class="post-data"><span class="date animated fadeInUp"><i class="fa fa-clock-o"></i> <time class="timesince date" data-timesince="1442440800" datetime="2015-09-17T00:00" title="17 September 2015">2015-09-17 00:00:00<ago class="ago"></time></span>
+            <span class="tags animated fadeInUp"><i class="fa fa-tags"></i> <a href="http://blog.ellixo.com/tag/JXLS">JXLS</a>, <a href="http://blog.ellixo.com/tag/Reporting"> Reporting</a>, <a href="http://blog.ellixo.com/tag/Jackson"> Jackson</a>, <a href="http://blog.ellixo.com/tag/CSV"> CSV</a>, <a href="http://blog.ellixo.com/tag/OpenData"> OpenData</a></span>
+            <span class="author animated fadeInUp"><i class="fa fa-user"></i> <a href="">Grégory Le Bonniec</a></span></span>
+    </section>
+    </div>
+</header>
+<main id="main" class="content">
+    <article itemtype="http://schema.org/BlogPosting" class="animated fadeIn content post post tag-JXLS tag-Reporting tag-Jackson tag-CSV tag-OpenData">
+        <section class="post-content">
+            <h1 id="_jxls" class="sect0">JXLS</h1>
+<div class="paragraph">
+<p>Quand on parle Excel dans le monde Java, on pense tout de suite à l&#8217;acteur historique <a href="https://poi.apache.org/">Apache POI</a>. POI permet depuis de nombreuses années de manipuler les formats Microsoft Office au sein de l'écosystème Java. Le gros avantage de POI quand on veut manipuler le format XLS par exemple est son extrême richesse ; pour autant, cette richesse en terme d&#8217;API se fait au détriment de la clarté du code : ceux qui ont déjà créé from scratch un fichier Excel via POI savent que le code nécessaire à la génération de ce dernier est extrêmement verbeux et souvent difficilement maintenable.</p>
+</div>
+<div class="paragraph">
+<p>C&#8217;est là que <a href="http://jxls.sourceforge.net/index.html">JXLS</a> vient à notre rescousse. En effet, JXLS n&#8217;a pas pour objectif de founir une nouvelle API Java MS Office (au contraire même, puisqu&#8217;il utilise POI en interne) mais de fournir un outil qui va simplifier la création de rapport Excel en se concentrant uniquement sur les données et le remplissage d&#8217;un fichier template standard à l&#8217;aide de raccourcis syntaxiques extrêmement puissants.</p>
+</div>
+<h1 id="_d_abord_le_jeu_de_donn_es" class="sect0">D&#8217;abord, le jeu de données</h1>
+<div class="paragraph">
+<p>Pour remplir notre premier fichier via JXLS, nous utiliserons un jeu de données publiques fournis par le site data.gouv.fr[data.gouv.fr] : la base publique de médicaments. Cette <a href="https://www.data.gouv.fr/fr/datasets/base-de-donnees-publique-des-medicaments-base-officielle/">base de données</a> permet au grand public et aux professionnels de santé d&#8217;accéder à des données et documents de référence sur les médicaments commercialisés ou ayant été commercialisés durant les deux dernières années en France. Et là où cette base se prête bien à l&#8217;exercice de reporting Excel, c&#8217;est qu&#8217;elle est actuellement fournie au format CSV et donc peu lisible et difficilement exploitable en l'état.</p>
+</div>
+<div class="paragraph">
+<p>Dans le cadre de notre exemple, nous nous concentrerons sur le fichier principal de cette base contenant l&#8217;ensemble des médicaments et leurs informations principales (nom, voies d&#8217;administration, laboratoire &#8230;&#8203;) : le fichier <strong>CIS_bdpm.txt</strong> (mise à jour du 04/09/2015 utilisée ici).</p>
+</div>
+<div class="paragraph">
+<p>La première étape est de transformer chaque ligne du fichier CSV en un objet Java. Pour cela, nous utiliserons la librairie <strong>Jackson CSV</strong> car oui, Jackson sait aussi faire ça (en plus de JSON bien sûr).</p>
+</div>
+<div class="paragraph">
+<p>Tout d&#8217;abord, définissons un objet <strong>Medicament</strong> qui portera les données CSV.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">@JsonPropertyOrder({"codeCIS", "denomination", "formePharmaceutique", "voiesAdministration", "statutAdministratifAMM", "typeProcedureAMM", "etatCommercialisation", "dateAMM", "statutBDM", "numeroAutorisationEuropeenne", "titulaires", "surveillanceRenforcee"})
+public class Medicament {
+
+    private String codeCIS;
+    private String denomination;
+    private String formePharmaceutique;
+    private List&lt;String&gt; voiesAdministration = new ArrayList&lt;&gt;();
+    private String statutAdministratifAMM;
+    private String typeProcedureAMM;
+    private String etatCommercialisation;
+    private String dateAMM;
+    private String statutBDM;
+    private String numeroAutorisationEuropeenne;
+    private List&lt;String&gt; titulaires = new ArrayList&lt;&gt;();
+    private String surveillanceRenforcee;
+
+    ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Il ne nous reste plus qu'à lire le fichier CSV et à indiquer à Jackson les informations de mapping pour récupérer la liste complète des médicaments :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">CsvMapper mapper = new CsvMapper();
+
+CsvSchema schema = mapper.schemaFor(Medicament.class).withArrayElementSeparator(';').withColumnSeparator('\t');
+MappingIterator&lt;Medicament&gt; it = mapper.reader(Medicament.class).with(schema).readValues(JXLS.class.getClassLoader().getResource("CIS_bdpm.txt"));
+
+List&lt;Medicament&gt; medicaments = it.readAll();</code></pre>
+</div>
+</div>
+<h1 id="_template_excel" class="sect0">Template Excel</h1>
+<div class="paragraph">
+<p>Maintenant que nous avons notre jeu de données, nous pouvons maintenant définir notre template Excel. Nous partons simplement d&#8217;un fichier Excel "classique" (à quelques détails prês) :</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/images/jxls/template1.png" alt="template1.png">
+</div>
+</div>
+<div class="paragraph">
+<p>En effet, vous pouvez voir que les cellules censées contenir les données de chaque médicament utilise la syntaxe suivante <strong>${variable.propriete}</strong>. Cette syntaxe est connue de JXLS bien sûr et sera utilisée ultérieurement pour remplir le document avec les données finales (vous trouverez le template <a href="https://github.com/Ellixo/JXLS-demo/blob/master/src/main/resources/BDM.xls?raw=true">ici</a>).</p>
+</div>
+<div class="paragraph">
+<p>Afin de finaliser notre template, nous allons l&#8217;enrichir en utilisant un des mécanismes fournis par JXLS pour simplifier la gestion des données : le système de markup. Pour ce faire, Nous allons insérer des metadatas JXLS au sein du template via les commentaires natifs Excel (remarque : les markups JXLS utilise la syntaxe Apache JEXL).</p>
+</div>
+<div class="paragraph">
+<p>Pour notre besoin, nous n&#8217;aurons besoin que de définir 2 markups :</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/images/jxls/template2.png" alt="template2.png">
+</div>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>le premier (<strong>jx:area(lastCell="L2")</strong>) défini la zone d&#8217;action de JXLS au sein du template (ici de la cellule A1 à la cellule L2). C&#8217;est une étape indispensable afin de permettre à JXLS de manipuler le fichier ; en effet, l&#8217;application de Command JXLS (ie. transformation et écriture au sein du fichier) ne peut se faire qu&#8217;au sein d&#8217;une Area. Il est bien sûr possible de définir plusieurs Areas ou même d&#8217;imbriquer des Areas au sein d&#8217;un même fichier mais dans notre cas, ça ne sera pas nécessaire.</p>
+</li>
+<li>
+<p>le deuxième et dernier commentaire (<strong>jx:each(items="medicaments" var="medicament" lastCell="L2")</strong>) indique à JXLS que nous désirons itérer sur la variable <strong>medicaments</strong> (ie. liste des médicaments), chaque élément de cette liste est associé à la variable <strong>medicament</strong> et le mapping de cette dernière avec le template s&#8217;applique jusqu'à la cellule L2.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Voilà, notre template est prêt.</p>
+</div>
+<h1 id="_g_n_ration_du_rapport" class="sect0">Génération du rapport</h1>
+<div class="paragraph">
+<p>Il ne nous reste plus qu'à générer le rapport final en faisant le lien entre données et template via l&#8217;API JXLS :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-java" data-lang="java">AreaBuilder areaBuilder = new XlsCommentAreaBuilder(); // activation de la gestion JXLS des commentaires Excel
+
+try (InputStream is = JXLS.class.getClassLoader().getResourceAsStream("./BDM.xls")) {
+    try (OutputStream os = new FileOutputStream("./BDM_result.xls")) {
+        Context context = new Context();
+        context.putVar("medicaments", medicaments);
+
+        Transformer transformer = TransformerFactory.createTransformer(is, os);
+
+        areaBuilder.setTransformer(transformer);
+        List xlsAreaList = areaBuilder.build();
+        Iterator iterator = xlsAreaList.iterator();
+
+        while (iterator.hasNext()) {
+            Area xlsArea = (Area) iterator.next();
+            xlsArea.applyAt(new CellRef(xlsArea.getStartCellRef().getCellName()), context);
+        }
+
+        transformer.write();
+    }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>On peut alors lancer la génération du rapport et là normalement&#8230;&#8203;ça ne marche pas ! En effet, il nous reste un dernier point à gérer : l&#8217;exécution de la génération du rapport devrait vous donner en l'état l&#8217;exception suivante :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">java.lang.ClassCastException: java.util.ArrayList cannot be cast to java.lang.String</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Le problème vient de notre objet <strong>Medicament</strong>. Ce dernier fournit 2 propriétés (<strong>voiesAdministration</strong> et <strong>titulaires</strong>) qui ne sont pas des types simples et donc non gérés par JXLS.</p>
+</div>
+<div class="paragraph">
+<p>Pour ce genre de cas, il possible de fournir des fonctions <strong>custom</strong> qui vont transformer nos propriétés au bon format. Pour ce faire, nous allons tout d&#8217;abord définir une classe transformant notre liste d&#8217;objets en chaîne :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">public static class ListUtil {
+
+    public String join(List list) {
+        StringBuilder builder = new StringBuilder();
+        for (Object o : list) {
+            if (builder.length() != 0) {
+                builder.append(" / ");
+            }
+            builder.append(o);
+        }
+        return builder.toString();
+    }
+
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Puis pour utiliser cette fonction dans notre template, il est nécessaire de la référencer au sein du <strong>Transformer</strong> JXSL :</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-bash" data-lang="bash">...
+JexlExpressionEvaluator evaluator = (JexlExpressionEvaluator) transformer.getTransformationConfig().getExpressionEvaluator();
+Map&lt;String, Object&gt; functionMap = new HashMap&lt;&gt;();
+functionMap.put("joiner", new ListUtil());
+evaluator.getJexlEngine().setFunctions(functionMap);
+...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Pour utiliser notre fonction, il nous suffit alors de modifier, par exemple pour la liste des titulaires, le contenu de la cellule correspondante de <strong>${medicament.titulaires}</strong> à <strong>${joiner:join(medicament.titulaires)}.</strong></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/images/jxls/template3.png" alt="template3.png">
+</div>
+</div>
+<div class="paragraph">
+<p>Et si nous relançons la génération du rapport, cette fois-ci, cela passe sans problème :</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="/images/jxls/result.png" alt="result.png">
+</div>
+</div>
+<h1 id="_conclusion" class="sect0">Conclusion</h1>
+<div class="paragraph">
+<p>La génération de rapport Excel est un besoin très courant et souvent stratégique pour les utilisateurs finaux, pourtant, il s&#8217;agit rarement du sujet le plus passionnant au sein d&#8217;un projet pour les développeurs. C&#8217;est en cela que JXLS est vraiment intéressant ; par sa simplicité et sa rapidité de mise en oeuvre, cette librairie vous fera gagner énormément de temps pour la mise en oeuvre de votre moteur de reporting Excel.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>Les sources de cet article sont disponibles sur le <a href="https://github.com/Ellixo/JXLS-demo">Repository GitHub Ellixo</a> - pour information, le fichier CIS_bdpm.txt n&#8217;est pas fourni dans le repository afin de ne pas stocker de données obsolètes : vous pourrez récupérer le fichier sur le <a href="https://www.data.gouv.fr/fr/datasets/base-de-donnees-publique-des-medicaments-base-officielle/">site dédié</a>.</p>
+</div>
+</div>
+</div>
+        </section>
+
+    
+        <section class="post-comments">
+          <h3 id="reply-title" class="comment-reply-title">Laisser un commentaire</h3>
+          <div id="disqus_thread"></div>
+          <script type="text/javascript">
+          var disqus_shortname = 'ellixo-blog'; // required: replace example with your forum shortname
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+          </script>
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </section>
+    
+    </article>
+
+</main>
+    <footer class="animated fadeIn" id="footer">
+        <section class="colophon">
+          <section class="copyright">Copyright &copy; <a href="http://www.ellixo.com">Ellixo</a> All Rights Reserved - Published with <a class="icon-ghost" href="http://hubpress.io">HubPress</a></section>
+        </section>
+        <section class="bottom">
+          <section class="attribution">
+            <a href="http://www.ellixo.com">Accueil Ellixo</a> - <a href="http://www.ellixo.com/mentions-blog.html">Mentions Légales</a>
+          </section>
+        </section>
+    </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js?v="></script> <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js?v="></script> 
+      <script type="text/javascript">
+        jQuery( document ).ready(function() {
+          // change date with ago
+          jQuery('ago.ago').each(function(){
+            var element = jQuery(this).parent();
+            element.html( moment(element.text()).fromNow());
+          });
+        });
+
+        hljs.initHighlightingOnLoad();      
+      </script>
+    <script src="//blog.ellixo.com/themes/Ellixo/assets/js/scripts.js?v=1.0.0"></script>
+    
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-63938697-1', 'auto');
+    ga('send', 'pageview');
+
+    </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.6/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>

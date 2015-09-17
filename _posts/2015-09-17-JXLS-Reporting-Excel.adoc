@@ -13,7 +13,7 @@ D'abord, le jeu de données
 
 Pour remplir notre premier fichier via JXLS, nous utiliserons un jeu de données publiques fournis par le site data.gouv.fr[data.gouv.fr] : la base publique de médicaments. Cette https://www.data.gouv.fr/fr/datasets/base-de-donnees-publique-des-medicaments-base-officielle/[base de données] permet au grand public et aux professionnels de santé d'accéder à des données et documents de référence sur les médicaments commercialisés ou ayant été commercialisés durant les deux dernières années en France. Et là où cette base se prête bien à l'exercice de reporting Excel, c'est qu'elle est actuellement fournie au format CSV et donc peu lisible et non exploitable en l'état.
 
-Dans le cadre de ce post, nous nous concentrerons sur le fichier principal de cette base contenant l'ensemble des médicaments et leurs informations principales (nom, voies d'administration, laboratoire ...) : le fichier *CIS_bdpm.txt*.
+Dans le cadre de ce post, nous nous concentrerons sur le fichier principal de cette base contenant l'ensemble des médicaments et leurs informations principales (nom, voies d'administration, laboratoire ...) : le fichier *CIS_bdpm.txt* (mise à jour du 04/09/2015 utilisée dans notre rapport).
 
 La première étape va être de transformer chaque ligne du fichier CSV en un objet Java. Pour cela, nous utiliserons la librairie *Jackson CSV* car oui, Jackson sait aussi faire ça (en plus de JSON bien sûr).
 
@@ -153,3 +153,7 @@ Conclusion
 ==========
 
 La génération de rapport Excel est un besoin très courant et souvent stratégique pour les utilisateurs finaux, pourtant, honnêtement, il s'agit rarement du sujet le plus passionnant au sein d'un projet pour les développeurs. C'est en cela que JXLS est vraiment intéressant ; par sa simplicité et sa rapidité de mise en oeuvre, cette librairie vous fera gagner énormément de temps pour la mise en oeuvre de votre moteur de reporting Excel.
+
+====
+Les sources de cet article sont disponibles sur le https://github.com/Ellixo/JXLS-demo[Repository GitHub Ellixo] - pour information, le fichier CIS_bdpm.txt n'est pas fourni dans le repository afin de ne pas stocker de données obsolètes : vous pourrez récupérer le fichier sur le https://www.data.gouv.fr/fr/datasets/base-de-donnees-publique-des-medicaments-base-officielle/[site dédié].
+====

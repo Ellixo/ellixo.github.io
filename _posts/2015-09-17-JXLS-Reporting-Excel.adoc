@@ -55,6 +55,10 @@ List<Medicament> medicaments = it.readAll();
 Template Excel
 ==============
 
-Maintenant que nous avons notre jeu de données, nous allons maintenant définir notre template Excel.
+Maintenant que nous avons notre jeu de données, nous pouvons maintenant définir notre template Excel. Et là, nous partons tout simplement d'un fichier Excel classique :
+
+C'est maintenant que je JXLS entre en scène ; dans un premier temps, nous allons enrichir notre template en utilisant un des mécanismes fournis par JXLS pour simplifier la gestion des données : le système de markup. 
+
+Nous allons tout simplement insérer des metadatas JXLS au sein du template via les commentaires (remarque : les markups JXLS utilise la syntaxe Apache JEXL).
 
 

@@ -1,0 +1,12 @@
+= JXLS - Reporting Excel
+:hp-tags: JXLS, Reporting, CSV, OpenData
+
+JXLS
+==========
+
+Quand on parle Excel dans le monde Java, on pense tout de suite à l'acteur historique Apache POI. POI permet depuis depuis de nombreuses années de manipuler les formats Microsoft Office au sein de l'écosystème Java. Le gros avantage de POI quand on veut manipuler le format XLS par exemple est son extrême richesse ; pour autant, cette richesse en terme d'API se fait au détriment la clarté du code : ceux qui ont déjà créé from scratch un fichier Excel via POI savent que le code nécessaire à la génération de ce dernier est extrêmement verbeux.
+
+
+
+Pourquoi monitorer vos applications ?
+=====================================

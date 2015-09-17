@@ -59,7 +59,7 @@ Maintenant que nous avons notre jeu de données, nous pouvons maintenant défini
 
 image::jxls/template1.png[]
 
-En effet, vous pouvez voir que les cellules censées contenir les données de chaque médicament utilise la syntaxe suivante *${variable.propriete}*. Cette syntaxe est connue de JXLS bien sûr et sera utilisée ultérieurement pour remplir le document avec les données finales.
+En effet, vous pouvez voir que les cellules censées contenir les données de chaque médicament utilise la syntaxe suivante *${variable.propriete}*. Cette syntaxe est connue de JXLS bien sûr et sera utilisée ultérieurement pour remplir le document avec les données finales (vous trouverez le template https://github.com/Ellixo/JXLS-demo/blob/master/src/main/resources/BDM.xls?raw=true[ici]).
 
 Afin de finaliser notre template, nous allons l'enrichir utilisant un des mécanismes fournis par JXLS pour simplifier la gestion des données : le système de markup. Pour ce faire, Nous allons insérer des metadatas JXLS au sein du template via les commentaires natifs Excel (remarque : les markups JXLS utilise la syntaxe Apache JEXL).
 

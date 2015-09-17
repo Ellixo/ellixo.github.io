@@ -2,7 +2,7 @@
 :hp-tags: JXLS, Reporting, Jackson, CSV, OpenData
 
 JXLS
-==========
+====
 
 Quand on parle Excel dans le monde Java, on pense tout de suite à l'acteur historique Apache POI. POI permet depuis depuis de nombreuses années de manipuler les formats Microsoft Office au sein de l'écosystème Java. Le gros avantage de POI quand on veut manipuler le format XLS par exemple est son extrême richesse ; pour autant, cette richesse en terme d'API se fait au détriment la clarté du code : ceux qui ont déjà créé from scratch un fichier Excel via POI savent que le code nécessaire à la génération de ce dernier est extrêmement verbeux.
 
@@ -16,3 +16,45 @@ Pour remplir notre premier fichier via JXLS, nous utiliserons un jeu de données
 Dans le cadre de ce post, nous nous concentrerons sur le fichier principal de cette base contenant l'ensemble des médicaments et leurs informations principales (nom, voies d'administration, laboratoire ...) : le fichier CIS_bdpm.txt.
 
 La première étape va être de transformer chaque ligne du fichier CSV en un objet Java. Pour cela, nous utiliserons la librairie Jackson CSV car oui, Jackson sait aussi faire ça (en plus de JSON bien sûr).
+
+Tout d'abord, définissons un objet Medicament qui portera les données CSV
+
+[source,java]
+----
+@JsonPropertyOrder({"codeCIS", "denomination", "formePharmaceutique", "voiesAdministration", "statutAdministratifAMM", "typeProcedureAMM", "etatCommercialisation", "dateAMM", "statutBDM", "numeroAutorisationEuropeenne", "titulaires", "surveillanceRenforcee"})
+public class Medicament {
+
+    private String codeCIS;
+    private String denomination;
+    private String formePharmaceutique;
+    private List<String> voiesAdministration = new ArrayList<>();
+    private String statutAdministratifAMM;
+    private String typeProcedureAMM;
+    private String etatCommercialisation;
+    private String dateAMM;
+    private String statutBDM;
+    private String numeroAutorisationEuropeenne;
+    private List<String> titulaires = new ArrayList<>();
+    private String surveillanceRenforcee;
+    
+    ...
+----
+
+Il nous reste simplement à lire le fichier CSV et à indiquer à Jackson les informations de mapping :
+
+[source,java]
+----
+CsvMapper mapper = new CsvMapper();
+
+CsvSchema schema = mapper.schemaFor(Medicament.class).withArrayElementSeparator(';').withColumnSeparator('\t');
+MappingIterator<Medicament> it = mapper.reader(Medicament.class).with(schema).readValues(JXLS.class.getClassLoader().getResource("CIS_bdpm.txt"));
+
+List<Medicament> medicaments = it.readAll();
+----
+
+Template Excel
+==============
+
+Maintenant que nous avons notre jeu de données, nous allons maintenant définir notre template Excel.
+
+

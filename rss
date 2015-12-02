@@ -5,54 +5,63 @@
     <link>http://blog.ellixo.com</link>
     <description>Le Blog d'Ellixo</description>
     <language>en-UK</language>
-    <pubDate>Thu, 17 Sep 2015 23:10:40 GMT</pubDate>
+    <pubDate>Wed, 02 Dec 2015 10:55:19 GMT</pubDate>
     <dc:creator>info@ellixo.com</dc:creator>
-    <dc:date>2015-09-17T23:10:40Z</dc:date>
+    <dc:date>2015-12-02T10:55:19Z</dc:date>
     <dc:language>en-UK</dc:language>
     <item>
       <title>10 raisons de se mettre à Spring Boot (1ère partie)</title>
       <link>http://blog.ellixo.com/2015/06/08/10-raisons-de-se-mettre-a-Spring-Boot-1ere-partie.html</link>
       <description>1 - Vous réconcilier avec Spring Je travaille depuis plusieurs semaines avec Spring Boot. Je dois avouer que l&amp;#8217;idée de mettre en place ce nouvel outil ne m&amp;#8217;enchantait gère. Bien sûr j&amp;#8217;avais eu de...</description>
       <category>Spring Boot</category>
-      <pubDate>Mon, 17 Aug 2015 22:57:53 GMT</pubDate>
+      <pubDate>Fri, 18 Sep 2015 01:21:58 GMT</pubDate>
       <guid>http://blog.ellixo.com/2015/06/08/10-raisons-de-se-mettre-a-Spring-Boot-1ere-partie.html</guid>
-      <dc:date>2015-08-17T22:57:53Z</dc:date>
+      <dc:date>2015-09-18T01:21:58Z</dc:date>
     </item>
     <item>
       <title>Breizhcamp - Saison 5</title>
       <link>http://blog.ellixo.com/2015/06/19/Breizhcamp-Saison-5.html</link>
       <description>La 5ème saison du Breizhcamp a eu lieu du 10 au 12 juin dernier. Elle a réuni 28 (256 donc) personnes sur le campus de Beaulieu à Rennes. Ellixo était bien évidemment présent et nous avons voulu partager avec vous...</description>
       <category>BreizhCamp</category>
-      <pubDate>Mon, 17 Aug 2015 22:27:42 GMT</pubDate>
+      <pubDate>Fri, 18 Sep 2015 01:21:58 GMT</pubDate>
       <guid>http://blog.ellixo.com/2015/06/19/Breizhcamp-Saison-5.html</guid>
-      <dc:date>2015-08-17T22:27:42Z</dc:date>
+      <dc:date>2015-09-18T01:21:58Z</dc:date>
     </item>
     <item>
       <title>10 raisons de se mettre à Spring Boot (2ème partie)</title>
       <link>http://blog.ellixo.com/2015/06/26/10-raisons-de-se-mettre-a-Spring-Boot-2eme-partie.html</link>
       <description>La première partie de cet article est disponible ici 6 - La sécurité pour les nuls La mise en oeuvre de mécanisme de sécurité est primordial ; pour autant, il s&amp;#8217;agit toujours d&amp;#8217;une étape fastidieuse que l&amp;...</description>
       <category>Spring Boot</category>
-      <pubDate>Mon, 17 Aug 2015 22:54:52 GMT</pubDate>
+      <pubDate>Fri, 18 Sep 2015 01:21:58 GMT</pubDate>
       <guid>http://blog.ellixo.com/2015/06/26/10-raisons-de-se-mettre-a-Spring-Boot-2eme-partie.html</guid>
-      <dc:date>2015-08-17T22:54:52Z</dc:date>
+      <dc:date>2015-09-18T01:21:58Z</dc:date>
     </item>
     <item>
       <title>Prometheus - Introduction</title>
       <link>http://blog.ellixo.com/2015/08/17/Prometheus-Introduction.html</link>
       <description>Prometheus Prometheus est un des derniers nés dans le domaine des solutions de monitoring (développé chez SoundCloud majoritairement en Go) - il vient marcher sur les plate-bandes de solutions comme Graphite en apportant une approche relativement différente. En effet, au-delà...</description>
       <category>Prometheus</category>
-      <pubDate>Mon, 17 Aug 2015 22:55:45 GMT</pubDate>
+      <pubDate>Fri, 18 Sep 2015 01:21:58 GMT</pubDate>
       <guid>http://blog.ellixo.com/2015/08/17/Prometheus-Introduction.html</guid>
-      <dc:date>2015-08-17T22:55:45Z</dc:date>
+      <dc:date>2015-09-18T01:21:58Z</dc:date>
     </item>
     <item>
       <title>JXLS - Reporting Excel</title>
       <link>http://blog.ellixo.com/2015/09/17/JXLS-Reporting-Excel.html</link>
       <description>JXLS Quand on parle Excel dans le monde Java, on pense tout de suite à l&amp;#8217;acteur historique Apache POI. POI permet depuis de nombreuses années de manipuler les formats Microsoft Office au sein de l'écosystème Java. Le gros...</description>
       <category>JXLS</category>
-      <pubDate>Fri, 18 Sep 2015 01:08:34 GMT</pubDate>
+      <pubDate>Fri, 18 Sep 2015 01:21:58 GMT</pubDate>
       <guid>http://blog.ellixo.com/2015/09/17/JXLS-Reporting-Excel.html</guid>
-      <dc:date>2015-09-18T01:08:34Z</dc:date>
+      <dc:date>2015-09-18T01:21:58Z</dc:date>
+    </item>
+    <item>
+      <title>Lancement du moteur de recherche Open Médicaments</title>
+      <link>http://blog.ellixo.com/2015/12/02/Lancement-du-moteur-de-recherche-Open-Medicaments.html</link>
+      <description>Dans le cadre du développement de l’activité e-santé de la société Ellixo, nous sommes fiers de vous présenter notre nouvelle application Open Médicaments. Open Médicaments est un moteur de recherche permettant d&amp;#8217;accéder à l&amp;#8217;ensemble des...</description>
+      <category>ESanté</category>
+      <pubDate>Wed, 02 Dec 2015 12:52:05 GMT</pubDate>
+      <guid>http://blog.ellixo.com/2015/12/02/Lancement-du-moteur-de-recherche-Open-Medicaments.html</guid>
+      <dc:date>2015-12-02T12:52:05Z</dc:date>
     </item>
   </channel>
 </rss>

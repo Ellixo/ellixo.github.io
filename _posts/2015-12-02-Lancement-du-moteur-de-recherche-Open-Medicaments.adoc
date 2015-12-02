@@ -1,9 +1,9 @@
-= Lancement du site Open Médicaments
+= Lancement du moteur de recherche Open Médicaments
 :hp-tags: ESanté, OpenData
 
-Dans le cadre du développement de l’activité e-santé de la société Ellixo, nous sommes fiers de vous présenter notre nouveau site *Open Médicaments*.
+Dans le cadre du développement de l’activité e-santé de la société Ellixo, nous sommes fiers de vous présenter notre nouvelle application http://www.open-medicaments.fr[*Open Médicaments*].
 
-Open Médicaments est *un moteur de recherche permettant d'accéder à l'ensemble des données et documents de référence sur les médicaments* commercialisés ou ayant été commercialisés durant les trois dernières années en France. Le site est accessible à l'adresse http://www.open-medicaments.fr
+http://www.open-medicaments.fr[Open Médicaments] est *un moteur de recherche permettant d'accéder à l'ensemble des données et documents de référence sur les médicaments* commercialisés ou ayant été commercialisés durant les trois dernières années en France. L'application est accessible à l'adresse http://www.open-medicaments.fr aussi bien sur ordinateur que sur mobiles et tablette
 
 Le référentiel de données est indexé sur la base de données publique des médicaments français (http://base-donnees-publique.medicaments.gouv.fr) qui met à disposition les données en OpenData. *Open Médicament est rafraîchi tous les jours* afin de garantir l'exactitude de données publiées.
 
